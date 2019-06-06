@@ -16,7 +16,7 @@ export default class Authentication extends Component {
     super(props);
     this.state = { isSignIn: true };
   }
-  
+
   goBackToMain() {
     const { navigator } = this.props;
     navigator.pop();
@@ -32,7 +32,8 @@ export default class Authentication extends Component {
     this.setState({ isSignIn: false });
   }
   render() {
-    const mainJSX = this.state.isSignIn ? <SignIn goBackToMain={this.goBackToMain.bind(this)} /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
+    const { isSignIn } = this.state;
+    const mainJSX = isSignIn ? <SignIn goBackToMain={this.goBackToMain.bind(this)} /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
     return (
       <View style={styles.container}>
         {/*header  */}
@@ -53,19 +54,13 @@ export default class Authentication extends Component {
             style={styles.styleButtonLeft}
             onPress={this.signIn.bind(this)}
           >
-            <Text
-              style={styles.inactiveStyle}
-            >
-              ĐĂNG NHẬP </Text>
+            <Text style={isSignIn ? styles.activeStyle : styles.inactiveStyle}>SIGN IN</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.styleButtonRight}
             onPress={this.signUp.bind(this)}
           >
-            <Text
-              style={styles.activeStyle}
-            >
-              ĐĂNG KÍ </Text>
+            <Text style={!isSignIn ? styles.activeStyle : styles.inactiveStyle}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -8,7 +8,7 @@ import getListProduct from '../../../../api/getListProduct';
 
 import backList from '../../../../media/appIcon/backList.png';
 
-const url = 'http://192.168.100.4/react-native/app/images/product/';
+const url = 'http://192.168.100.6/react-native/app/images/product/';
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
@@ -24,7 +24,7 @@ export default class ListProduct extends Component {
 
     componentDidMount() {
         const idType = this.props.category.id;
-        getListProduct(idType, 1)
+        getListProduct(idType)
             .then(arrProduct => {
                 this.arr = arrProduct;
                 this.setState({ listProducts: (this.arr) });
@@ -63,7 +63,7 @@ export default class ListProduct extends Component {
                     data={this.state.listProducts}
                     renderItem={({ item }) =>
                         <View style={productContainer}>
-                            <Image style={productImage} source={{ uri: `${url}${item.images[0]}` }} />
+                            <Image style={productImage} source={{ uri: `${url}${item.images}` }} />
                             <View style={productInfo}>
                                 <Text style={txtName}>{toTitleCase(item.name)}</Text>
                                 <View style={lastRowInfo}>

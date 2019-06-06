@@ -1,16 +1,16 @@
 import React, { component } from 'react';
-import {  Navigator } from 'react-native-deprecated-custom-components';
+import { Navigator } from 'react-native-deprecated-custom-components';
 import Authentication from './Authentication/Authentication';
 import ChangeInfo from './ChangeInfo/ChangeInfo';
 import Main from './Main/Main';
 import OrderHistory from './OrderHistory/OrderHistory';
 import refreshToken from '../api/refreshToken';
-import ThemSanPham from './ShopAdmin/ThemSanPham';
-import DanhSachSanPham from './ShopAdmin/DanhSachSanPham';
-import DanhSachOrder from './ShopAdmin/DanhSachOrder';
-import Bill_Order from './ShopAdmin/Bill_Detail';
+import AddProduct from './ShopAdmin/AddProduct';
+import ListProduct from './ShopAdmin/ListProduct';
+import ListOrder from './ShopAdmin/ListOrder';
+import Bill_Detail from './ShopAdmin/Bill_Detail';
 export default class App extends React.Component {
-    
+
     componentDidMount() {
         setInterval(refreshToken, 30000);
     }
@@ -21,12 +21,12 @@ export default class App extends React.Component {
                 renderScene={(route, navigator) => {
                     switch (route.name) {
                         case 'MAIN': return <Main navigator={navigator} />;
-                        case 'CHANGE_INFO': return <ChangeInfo navigator={navigator} user = {route.user}/>;
+                        case 'CHANGE_INFO': return <ChangeInfo navigator={navigator} user={route.user} />;
                         case 'AUTHENTICATION': return <Authentication navigator={navigator} />;
-                        case 'THEM_SAN_PHAM': return <ThemSanPham navigator={navigator} />;
-                        case 'DANH_SACH_SAN_PHAM': return <DanhSachSanPham navigator={navigator} />;
-                        case 'DANH_SACH_Order': return <DanhSachOrder navigator={navigator} />;
-                        case 'Bill_Order': return <Bill_Order navigator={navigator} />;
+                        case 'ADD_PRODUCT': return <AddProduct navigator={navigator} />;
+                        case 'LIST_PRODUCT': return <ListProduct navigator={navigator} />;
+                        case 'LIST_ORDER': return <ListOrder navigator={navigator} />;
+                        case 'BILL_DETAIL': return <Bill_Detail navigator={navigator} bill={route.bill} />;
                         default: return <OrderHistory navigator={navigator} />;
                     }
                 }}

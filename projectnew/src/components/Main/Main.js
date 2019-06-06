@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Drawer from 'react-native-drawer';
-//import { TouchableOpacity } from 'react-native-gesture-handler';
 import Menu from './Menu';
 import Shop from './Shop/Shop';
 import checkLogin from '../../api/checkLogin';
 import getToken from '../../api/getToken';
 import global from '../global';
 export default class Main extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     getToken()
-        .then(token => checkLogin(token))
-        .then(res => global.onSignIn(res.user))
-        .catch(err => console.log('LOI CHECK LOGIN', err));
+      .then(token => checkLogin(token))
+      .then(res => global.onSignIn(res.user))
+      .catch(err => console.log('LOI CHECK LOGIN', err));
   }
   closeControlPanel = () => {
     this.drawer.close();
@@ -35,7 +34,7 @@ export default class Main extends React.Component {
         tapToClose
         styles={drawerStyles}
         tweenHandler={(ratio) => ({
-        main: { opacity: (2 - ratio) / 2 }
+          main: { opacity: (2 - ratio) / 2 }
         })}
       >
         <Shop open={this.openControlPanel.bind(this)} />

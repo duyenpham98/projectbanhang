@@ -31,8 +31,10 @@ try{
 			$tongtien += $product['price'];
 		}
 		$todate = date('Y-m-d h:i:s');
+		if($tongtien > 0)
+		{
 		$sql = "INSERT INTO bill(id_customer,date_order, total) VALUES ($id_user, '$todate', $tongtien)";
-
+		}
 		$mysqli->query($sql);
 		$id_bill = $mysqli->insert_id;
 		foreach ($arrayDetail as $value) {

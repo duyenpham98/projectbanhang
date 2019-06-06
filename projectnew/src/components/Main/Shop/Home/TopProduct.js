@@ -3,12 +3,12 @@ import {
     View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, FlatList
 } from 'react-native';
 
-const url = 'http://192.168.100.4/react-native/app/images/product/';
+const url = 'http://192.168.100.6/react-native/app/images/product/';
 
 export default class TopProduct extends Component {
     gotoDetail(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL' , product });
+        navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const {
@@ -19,23 +19,23 @@ export default class TopProduct extends Component {
         const { topProducts } = this.props;
         return (
             <View style={container}>
-            <View style={titleContainer}>
-                <Text style={title}>TOP PRODUCT</Text>
-            </View>   
-            <FlatList 
-                contentContainerStyle={body} 
-                enableEmptySections
-                data={topProducts}
-                renderItem={({item}) => 
-                    <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(item)}>
-                        <Image source={{ uri: `${url}${item.images[0]}` }} style={productImage} />
-                        <Text style={produceName}>{item.name.toUpperCase()}</Text>
-                        <Text style={producePrice}>{item.price}$</Text>
-                    </TouchableOpacity>
-                }
-                keyExtractor={({id}, index) => id}
-            />
-        </View>
+                <View style={titleContainer}>
+                    <Text style={title}>TOP PRODUCT</Text>
+                </View>
+                <FlatList
+                    contentContainerStyle={body}
+                    enableEmptySections
+                    data={topProducts}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(item)}>
+                            <Image source={{ uri: `${url}${item.images}` }} style={productImage} />
+                            <Text style={produceName}>{item.name.toUpperCase()}</Text>
+                            <Text style={producePrice}>{item.price}$</Text>
+                        </TouchableOpacity>
+                    }
+                    keyExtractor={({ id }, index) => id}
+                />
+            </View>
         );
     }
 }
@@ -78,16 +78,16 @@ const styles = StyleSheet.create({
         height: productImageHeight
     },
     produceName: {
-        marginVertical: 5,
+        marginVertical: 7,
         paddingLeft: 10,
         fontFamily: 'Avenir',
-        color: '#D3D3CF',
+        color: '#778899',
         fontWeight: '500'
     },
     producePrice: {
         marginBottom: 5,
-        paddingLeft: 10,
+        paddingLeft: 50,
         fontFamily: 'Avenir',
-        color: '#662F90'
+        color: '#CD5C5C'
     }
 });

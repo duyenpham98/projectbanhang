@@ -80,6 +80,3 @@ const styleHeader = StyleSheet.create({
         paddingVertical: 0 
     },
 });
-/* <TouchableOpacity onPress={this.props.onOpen}>
-            <Text>open Menu</Text>
-        </TouchableOpacity> */

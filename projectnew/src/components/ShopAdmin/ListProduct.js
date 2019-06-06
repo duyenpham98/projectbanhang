@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
 import icLogo from '../../media/appIcon/logo.png';
 
-const url = 'http://192.168.100.4/react-native/app/images/product/';
+const url = 'http://192.168.100.6/react-native/app/images/product/';
 const back = require('../../media/appIcon/back.png');
-class DanhSachSanPham extends Component {
+class ListProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,10 +12,10 @@ class DanhSachSanPham extends Component {
             state: false,
         }
     }
-    
+
     // Phương thuc xoa dư lieu
     Delete_product(id) {
-        fetch('http://192.168.100.4/react-native/app/delete_product.php', {
+        fetch('http://192.168.100.6/react-native/app/delete_product.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -33,12 +33,28 @@ class DanhSachSanPham extends Component {
             });
 
     }
+
+    Delete(id){
+        Alert.alert(
+            'Delete Product',
+            'Do you want delete this product?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {text: 'OK', onPress: ()=>this.Delete_product(id)},
+            ],
+            {cancelable: false},
+          );
+    }
     goBack() {
         const { navigator } = this.props;
         navigator.pop();
     }
     componentDidMount() {
-        return fetch('http://192.168.100.4/react-native/app/listproduct.php')
+        return fetch('http://192.168.100.6/react-native/app/listproduct.php')
             .then((response) => response.json())
             .then((responseJson) => {
 
@@ -61,27 +77,27 @@ class DanhSachSanPham extends Component {
             )
         }
         return (
-                
+
             <View style={styles.wrapper}>
-                 <View style={styles.headr}>
-                <TouchableOpacity onPress={this.goBack.bind(this)}>
-                    <Image style={styles.backStyle} source={back} />
-                </TouchableOpacity>
-                    <Text style={{ color: 'white' , fontSize: 25}}> SHOP SPACE </Text>
+                <View style={styles.headr}>
+                    <TouchableOpacity onPress={this.goBack.bind(this)}>
+                        <Image style={styles.backStyle} source={back} />
+                    </TouchableOpacity>
+                    <Text style={{ color: 'white', fontSize: 25 }}> LIST PRODUCT </Text>
                     <Image source={icLogo} style={styles.iconStyle} />
                 </View>
-                
+
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
                         <View style={styles.wrapper1}>
                             <View style={styles.imageContainer}>
-                                <TouchableOpacity style={styles.touch} onPress={() => this.Delete_product(item.id)} >
+                                <TouchableOpacity style={styles.touch} onPress={() => this.Delete(item.id)} >
                                     <Text style={{ fontSize: 20, color: '#EE2C2C' }}>x</Text>
                                 </TouchableOpacity>
                                 <Image source={{ uri: `${url}${item.link}` }} style={styles.imageStyle} />
                             </View>
-                           
+
                             <View style={styles.footer}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.price}>{item.price}$</Text>
@@ -91,7 +107,7 @@ class DanhSachSanPham extends Component {
                     keyExtractor={({ id }, index) => id}
 
                 />
-                
+
             </View>
         );
 
@@ -120,13 +136,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F6F6F6',
         padding: 10,
-        
+
     },
     wrapper1: {
         flex: 1,
         backgroundColor: '#F6F6F6',
         padding: 10,
-        borderBottomColor: 'gray', 
+        borderBottomColor: 'gray',
         borderBottomWidth: 1
     },
     backStyle: {
@@ -137,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         marginHorizontal: 10,
-       
+
     },
     footer: {
         flex: 1,
@@ -157,4 +173,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DanhSachSanPham;
+export default ListProduct;

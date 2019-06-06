@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity,Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 export default class SignUp extends React.Component {
     static navigationOptions = {
         title: 'Registration', // to add letter spacing on Android
@@ -23,59 +23,60 @@ export default class SignUp extends React.Component {
         }
     }
     insertaccount() {
-        if(this.state.name == ''){
-            alert("Không được để trống Họ Tên");
+        if (this.state.name == '') {
+            alert("Name must not be empty");
         }
-        if(this.state.email == ''){
-            alert("Không được để trống Email");
+        if (this.state.email == '') {
+            alert("Email must not be empty");
         }
-        if(this.state.password == ''){
-            alert("Không được để trống Mật Khẩu");
+        if (this.state.password == '') {
+            alert("Password must not be empty");
         }
-        if(this.state.phone == ''){
-            alert("Không được để trống phone");
+        if (this.state.phone == '') {
+            alert("Phone must not be empty");
         }
-        if(this.state.address == ''){
-            alert("Không được để trống address");
+        if (this.state.address == '') {
+            alert("Address must not be empty");
         }
-        if(this.state.password.length <6){
-            alert("Mật khẩu phải hơn 6 kí tự");
+        if (this.state.password.length < 6) {
+            alert("Password must be more than 6 characters");
         }
         else {
-        fetch('http://192.168.100.411/react-native/app/register.php', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password,
-                phone: this.state.phone,
-                address: this.state.address,
-            }),
-        })
-            .then((responseJson) => {
-                alert("Tạo tài khoản thành công!");
-                this.setState({ email: '' });
-                this.setState({ name: '' });
-                this.setState({ password: '' });
-                this.setState({ phone: '' });
-                this.setState({ address: '' });
+            fetch('http://192.168.100.6/react-native/app/register.php', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    email: this.state.email,
+                    password: this.state.password,
+                    phone: this.state.phone,
+                    address: this.state.address,
+                }),
             })
-            .catch((error) => {
-                console.error(error);
-            });}
+                .then((responseJson) => {
+                    alert("Account successfully created!");
+                    this.setState({ email: '' });
+                    this.setState({ name: '' });
+                    this.setState({ password: '' });
+                    this.setState({ phone: '' });
+                    this.setState({ address: '' });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
     render() {
         return (
             <View style={styles.container}>
-            
+
                 <TextInput style={styles.hoten}
                     onChangeText={(name) => this.setState({ name })}
                     value={this.state.name}
-                    placeholder='Họ tên'
+                    placeholder='Name'
                     placeholderTextColor='#CD8500'
                     autoFocus={true}
                     returnKeyType='next'
@@ -94,7 +95,7 @@ export default class SignUp extends React.Component {
                 <TextInput style={styles.matkhau}
                     onChangeText={(password) => this.setState({ password })}
                     value={this.state.password}
-                    placeholder='Mật khẩu'
+                    placeholder='Password'
                     placeholderTextColor='#CD8500'
                     returnKeyType='next'
                     secureTextEntry={true}
@@ -104,7 +105,7 @@ export default class SignUp extends React.Component {
                 <TextInput style={styles.phone}
                     onChangeText={(phone) => this.setState({ phone })}
                     value={this.state.phone}
-                    placeholder='phone'
+                    placeholder='Phone'
                     placeholderTextColor='#CD8500'
                     returnKeyType='next'
                     autoCorrect={false}//không hiện ra gợi ý khi nhập
@@ -118,11 +119,11 @@ export default class SignUp extends React.Component {
                     returnKeyType='next'
                     autoCorrect={false}//không hiện ra gợi ý khi nhập
                 />
-                <View style={{ flexDirection: 'column' }}>
+                <View style={{ flexDirection: 'column' , flex: 1 , marginLeft: 25, marginRight: 25 , marginBottom: 10}}>
                     <View style={styles.btnxacnhan}>
                         <TouchableOpacity onPress={() => this.insertaccount()}
                         >
-                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold',paddingTop: 5 }}>Sign UP</Text>
+                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', paddingTop: 5 }}>Sign UP</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -178,12 +179,11 @@ const styles = StyleSheet.create({
     },
     btnxacnhan: {
         borderColor: 'gray',
-        marginTop: 5,
+        margin: 25,
         borderWidth: 1,
         alignItems: 'center',
         margin: 10,
         height: 40,
-        marginBottom: 5,
         backgroundColor: '#4d1c2f',
         borderRadius: 20,
     },
@@ -194,12 +194,6 @@ const styles = StyleSheet.create({
         flex: 1
 
     },
-    logo: {
-        width: 200,
-        height: 100
-
-    },
-
     phone: {
         borderColor: 'gray',
         margin: 20,

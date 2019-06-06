@@ -11,7 +11,7 @@ const options = {
     chooseFromLibraryButtonTitle: 'Choose from gallery',
     quality: 1,
 };
-class ThemSanPham extends Component {
+class AddProduct extends Component {
     constructor() {
         super()
         this.state = {
@@ -32,58 +32,54 @@ class ThemSanPham extends Component {
         navigator.pop();
     }
     add_product() {
-        if(this.state.name == "")
-        {
+        if (this.state.name == "") {
             alert("Product name must not be empty");
         }
-        if(this.state.price == "")
-        {
+        if (this.state.price == "") {
             alert("Product price must not be empty");
         }
-        if(this.state.color == "")
-        {
+        if (this.state.color == "") {
             alert("Product color must not be empty");
         }
-        if(this.state.material == "")
-        {
+        if (this.state.material == "") {
             alert("Product material must not be empty");
         }
-        if(this.state.description == "")
-        {
+        if (this.state.description == "") {
             alert("Product description must not be empty");
         }
-        else{
-        fetch('http://192.168.100.4/react-native/app/add_product.php', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                id_type: this.state.id_type,
-                price: this.state.price,
-                color: this.state.color,
-                material: this.state.material,
-                description: this.state.description,
-                new: this.state.news,
-                inCollection: this.state.collection,
-            }),
-        })
-            .then((responseJson) => {
-                alert("add product success");
-                this.setState({ name: "" });
-                this.setState({ id_type: "" });
-                this.setState({ price: "" });
-                this.setState({ color: "" });
-                this.setState({ material: "" });
-                this.setState({ description: "" });
-                this.setState({ news: "" });
-                this.setState({ collection: "" });
+        else {
+            fetch('http://192.168.100.6/react-native/app/add_product.php', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    id_type: this.state.id_type,
+                    price: this.state.price,
+                    color: this.state.color,
+                    material: this.state.material,
+                    description: this.state.description,
+                    new: this.state.news,
+                    inCollection: this.state.collection,
+                }),
             })
-            .catch((error) => {
-                console.error(error);
-            });
+                .then((responseJson) => {
+                    alert("add product success");
+                    this.setState({ name: "" });
+                    this.setState({ id_type: "" });
+                    this.setState({ price: "" });
+                    this.setState({ color: "" });
+                    this.setState({ material: "" });
+                    this.setState({ description: "" });
+                    this.setState({ news: "" });
+                    this.setState({ collection: "" });
+                    onPress=this.uploadPhoto();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     }
     selectPhoto() {
@@ -110,17 +106,17 @@ class ThemSanPham extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.4/react-native/app/upload_file.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.6/react-native/app/upload_file.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',
-        }, [                
-            // custom content type
+        }, [
+                // custom content type
                 { name: 'image', filename: 'image.png', type: 'image/png', data: this.state.data },
             ]).then((resp) => {
                 alert("upload success");
             }).catch((err) => {
-                // ...
+                alert("error" . err);
             })
     }
     render() {
@@ -134,7 +130,7 @@ class ThemSanPham extends Component {
                     <TouchableOpacity onPress={this.goBack.bind(this)}>
                         <Image style={styles.backStyle} source={back} />
                     </TouchableOpacity>
-                    <Text style={{ color: 'white', fontSize: 25 }}> SHOP SPACE </Text>
+                    <Text style={{ color: 'white', fontSize: 25 }}> ADD PRODUCT </Text>
                     <Image source={icLogo} style={styles.iconStyle} />
                 </View>
 
@@ -143,9 +139,6 @@ class ThemSanPham extends Component {
                     <Image style={imageStyle} source={this.state.imageSource != null ? this.state.imageSource : require('./image/contact0.png')} />
                     <TouchableOpacity style={mapContainer} onPress={this.selectPhoto.bind(this)}>
                         <Text>SELECT</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={mapContainer} onPress={this.uploadPhoto.bind(this)}>
-                        <Text>UPLOAD</Text>
                     </TouchableOpacity>
                     <TextInput style={styles.textInput}
                         onChangeText={(name) => this.setState({ name })}
@@ -230,8 +223,8 @@ class ThemSanPham extends Component {
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
-    wrapper: { flex: 1, backgroundColor: '#FFFFCC', alignItems: 'center' },
-    wrapper1: { flex: 1, backgroundColor: '#FFFFCC' },
+    wrapper: { flex: 1, backgroundColor: '#F0FFFF', alignItems: 'center' },
+    wrapper1: { flex: 1, backgroundColor: '#F0FFFF' },
     headr: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -256,7 +249,7 @@ const styles = StyleSheet.create({
     mapContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#33FFCC',
+        backgroundColor: '#2E8B57',
         margin: 10,
         width: 70,
         height: 30,
@@ -265,7 +258,7 @@ const styles = StyleSheet.create({
     mapContainer1: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#33FFCC',
+        backgroundColor: '#2E8B57',
         margin: 10,
         width: 70,
         height: 30,
@@ -285,4 +278,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ThemSanPham;
+export default AddProduct;

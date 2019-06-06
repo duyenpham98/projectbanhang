@@ -3,7 +3,7 @@ import { View, Text, ImageBackground, StyleSheet, Dimensions, TouchableOpacity }
 import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
-const url = 'http://192.168.100.4/react-native/app/images/type/';
+const url = 'http://192.168.100.6/react-native/app/images/type/';
 
 export default class Category extends Component {
     gotoListProduct(category) {
@@ -15,13 +15,13 @@ export default class Category extends Component {
         const { wrapper, textStyle, imageStyle, cateTitle } = styles;
         const swiper = (
             <Swiper showsPagination width={imageWidth} height={imageHeight} >
-                { types.map(e => (
-                   <TouchableOpacity onPress={() => this.gotoListProduct(e)} key={e.id}>
+                {types.map(e => (
+                    <TouchableOpacity onPress={() => this.gotoListProduct(e)} key={e.id}>
                         <ImageBackground source={{ uri: `${url}${e.image}` }} style={imageStyle}>
                             <Text style={cateTitle}>{e.name}</Text>
                         </ImageBackground>
                     </TouchableOpacity>
-                )) }
+                ))}
             </Swiper>
         );
         return (
@@ -30,7 +30,7 @@ export default class Category extends Component {
                     <Text style={textStyle} >LIST OF CATEGORY</Text>
                 </View>
                 <View style={{ justifyContent: 'flex-end', flex: 4 }}>
-                    { types.length ? swiper : null }
+                    {types.length ? swiper : null}
                 </View>
             </View>
         );

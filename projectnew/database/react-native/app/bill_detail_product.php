@@ -1,30 +1,11 @@
 <?php
 
 	include('connect/connect.php');
-
-	$sql = "select bill.id , bill_detail.quantity , bill_detail.price , product.name
-from bill_detail LEFT join product on product.id = bill_detail.id_product inner join bill ON bill.id = bill_detail.id_bill;";
- 
-	$result = $mysqli->query($sql);
-
-	if ($result->num_rows >0) { 
-
-	while($row[] = $result->fetch_assoc()) {
-
-	$tempt = $row;
-
-	$json = json_encode($tempt);
-
-
+	$id_bill = $_GET['id_bill'];
+	$products = $mysqli->query ("select bill.id , bill_detail.quantity , bill_detail.price , product.name , product.color , product.material from bill_detail LEFT join product on product.id = bill_detail.id_product inner join bill ON bill.id = bill_detail.id_bill WHERE id_bill = $id_bill group by bill_detail.id");
+	while ($row = $products->fetch_object()){
+	    $product[] = $row;	
 	}
-
-	} else {
-	echo "No Results Found.";
-	}
-
-	echo $json;
-	
-	$mysqli->close();
-	
+	echo json_encode($product);
 ?>
 	

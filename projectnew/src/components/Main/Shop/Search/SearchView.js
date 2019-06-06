@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, FlatList, View, Image, Dimensions } from 'react-native';
 import global from '../../../global';
-const url = 'http://192.168.100.4/react-native/app/images/product/';
+const url = 'http://192.168.100.6/react-native/app/images/product/';
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -10,7 +10,7 @@ function toTitleCase(str) {
 class SearchView extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             listProduct: null
         };
@@ -22,7 +22,7 @@ class SearchView extends Component {
 
     gotoDetail(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL',product });
+        navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const {
@@ -34,9 +34,9 @@ class SearchView extends Component {
             <View style={wrapper}>
                 <FlatList
                     data={this.state.listProduct}
-                    renderItem={({item}) => 
+                    renderItem={({ item }) =>
                         <View style={product}>
-                            <Image source={{ uri: `${url}${item.images[0]}` }} style={productImage} />
+                            <Image source={{ uri: `${url}${item.images}` }} style={productImage} />
                             <View style={mainRight}>
                                 <Text style={txtName}>{toTitleCase(item.name)}</Text>
                                 <Text style={txtPrice}>{item.price}$</Text>
@@ -59,7 +59,7 @@ class SearchView extends Component {
                             </View>
                         </View>
                     }
-                    keyExtractor={({id}, index) => id}
+                    keyExtractor={({ id }, index) => id}
                 />
             </View>
         );
@@ -94,14 +94,6 @@ const styles = StyleSheet.create({
     mainRight: {
         flex: 3,
         justifyContent: 'space-between'
-    },
-    productController: {
-        flexDirection: 'row'
-    },
-    numberOfProduct: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
     },
     txtName: {
         paddingLeft: 20,

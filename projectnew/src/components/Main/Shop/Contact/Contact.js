@@ -15,7 +15,7 @@ class Contact extends Component {
         return (
             <View style={wrapper}>
                 <View style={mapContainer}>
-                <MapView
+                    <MapView
                         style={{ width: width - 30, height: 185 }}
                         initialRegion={{
                             latitude: 37.78825,
@@ -49,6 +49,7 @@ class Contact extends Component {
                         <Text style={infoText}>(+84) 999999</Text>
                     </View>
                 </View>
+
             </View>
         );
     }

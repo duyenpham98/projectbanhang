@@ -1,5 +1,5 @@
 import React, { component } from 'react';
-import { View, Dimensions, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import Home from './Home/Home';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
@@ -18,9 +18,9 @@ import search from '../../../media/appIcon/search.png';
 import contact0 from '../../../media/appIcon/contact0.png';
 import contact from '../../../media/appIcon/contact.png';
 import global from '../../global';
-const { height } = Dimensions.get('window');
+
 export default class Shop extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,7 @@ export default class Shop extends React.Component {
     }
     removeProduct(productId) {
         const newCart = this.state.cartArray.filter(e => e.product.id !== productId);
-        this.setState({ cartArray: newCart }, 
+        this.setState({ cartArray: newCart },
             () => saveCart(this.state.cartArray)
         );
     }
@@ -46,9 +46,12 @@ export default class Shop extends React.Component {
     }
     addProductToCart(product) {
         const isExist = this.state.cartArray.some(e => e.product.id === product.id);
-        if (isExist) return false;
+        if (isExist) {
+            alert("This product has been added to the previous cart");
+            return false;
+        }
         this.setState(
-            { cartArray: this.state.cartArray.concat({ product, quantity: 1 }) }, 
+            { cartArray: this.state.cartArray.concat({ product, quantity: 1 }) },
             () => saveCart(this.state.cartArray)
         );
     }
@@ -57,7 +60,7 @@ export default class Shop extends React.Component {
             if (e.product.id !== productId) return e;
             return { product: e.product, quantity: e.quantity + 1 };
         });
-        this.setState({ cartArray: newCart }, 
+        this.setState({ cartArray: newCart },
             () => saveCart(this.state.cartArray)
         );
     }
@@ -65,27 +68,31 @@ export default class Shop extends React.Component {
     decrQuantity(productId) {
         const newCart = this.state.cartArray.map(e => {
             if (e.product.id !== productId) return e;
+            if (e.quantity <= 1) {
+                alert("The product you want to buy is not under one");
+                return e;
+            }
             return { product: e.product, quantity: e.quantity - 1 };
         });
-        this.setState({ cartArray: newCart }, 
+        this.setState({ cartArray: newCart },
             () => saveCart(this.state.cartArray)
         );
     }
-    componentDidMount(){
+    componentDidMount() {
         initData()
-        .then(resJSON => {
-            const { type , product   } = resJSON;
-            this.setState({ types: type , topProducts: product });
-        });
+            .then(resJSON => {
+                const { type, product } = resJSON;
+                this.setState({ types: type, topProducts: product });
+            });
         getCart()
-        .then(cartArray => this.setState({ cartArray }));
+            .then(cartArray => this.setState({ cartArray }));
     }
     openMenu() {
         const { open } = this.props;
         open();
     }
     render() {
-        const {types , selectedTab , topProducts,cartArray} = this.state;
+        const { types, selectedTab, topProducts, cartArray } = this.state;
         return (
             <View style={{ flex: 1, backgroundColor: '#85A6C9' }}>
                 <Header onOpen={this.openMenu.bind(this)} />
@@ -98,7 +105,7 @@ export default class Shop extends React.Component {
                         title="Home"
                         onPress={() => this.setState({ selectedTab: 'home' })}
                     >
-                        <Home types = {types} topProducts = {topProducts}/>
+                        <Home types={types} topProducts={topProducts} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         renderIcon={() => <Image style={styleApp.iconStyle} source={contact0} />}
@@ -117,7 +124,7 @@ export default class Shop extends React.Component {
                         title="cart"
                         badgeText={cartArray.length}
                         onPress={() => this.setState({ selectedTab: 'cart' })}>
-                        <Cart cartArray = {cartArray}/>
+                        <Cart cartArray={cartArray} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         renderIcon={() => <Image style={styleApp.iconStyle} source={search0} />}

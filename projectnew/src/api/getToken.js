@@ -8,7 +8,7 @@ const getToken = async () => {
         }
         return '';
     } catch (error) {
-    // Error retrieving data
+        // Error retrieving data
         return '';
     }
 };

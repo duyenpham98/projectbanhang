@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { 
-    View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity 
+import {
+    View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity
 } from 'react-native';
 
 
@@ -8,7 +8,7 @@ import global from '../../../global';
 const back = require('../../../../media/appIcon/back.png');
 const cart = require('../../../../media/appIcon/cartfull.png');
 
-const url = 'http://192.168.100.4/react-native/app/images/product/';
+const url = 'http://192.168.100.6/react-native/app/images/product/';
 
 export default class ProductDetail extends Component {
     goBack() {
@@ -27,7 +27,7 @@ export default class ProductDetail extends Component {
             textSmoke, textHighlight, textMain, titleContainer,
             descContainer, productImageStyle, descStyle, txtMaterial, txtColor
         } = styles;
-        const {  name , price , color , material , description , images } = this.props.product;
+        const { name, price, color, material, description, images } = this.props.product;
         return (
             <ScrollView style={wrapper}>
                 <View style={cardStyle}>
@@ -41,7 +41,7 @@ export default class ProductDetail extends Component {
                     </View>
                     <View style={imageContainer}>
                         <ScrollView >
-                            <Image source={{ uri: `${url}${images[0]}` }} style={productImageStyle} />
+                            <Image source={{ uri: `${url}${images}` }} style={productImageStyle} />
                         </ScrollView>
                     </View>
                     <View style={footer}>
@@ -58,7 +58,7 @@ export default class ProductDetail extends Component {
                                 <Text style={txtMaterial}>Material: {material}</Text>
                                 <View style={{ flexDirection: 'row' }} >
                                     <Text style={txtColor}>Color: {color}</Text>
-                                    <View style={{ height: 15, width: 15, backgroundColor: color.toLowerCase(), borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70',marginTop: 3 }} />
+                                    <View style={{ height: 15, width: 15, backgroundColor: color.toLowerCase(), borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70', marginTop: 3 }} />
                                 </View>
                             </View>
                         </View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     descStyle: {
-        color: '#ECAB53',
+        color: '#5F9EA0',
         fontFamily: 'Tomaho',
         fontSize: 15,
     },

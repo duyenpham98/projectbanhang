@@ -23,7 +23,7 @@ export default class ChangeInfo extends Component {
     change() {
         const { txtName, txtAddress, txtPhone } = this.state;
         getToken()
-            .then(token => changeInfo(token, txtName, txtPhone,txtAddress ))
+            .then(token => changeInfo(token, txtName, txtPhone, txtAddress))
             .then(user => {
                 this.alertSuccess();
                 global.onSignIn(user);

@@ -7,8 +7,7 @@
 		$product = array();
 		$products = $mysqli->query("SELECT p.*, GROUP_CONCAT(i.link) AS images FROM product p INNER JOIN images i ON p.id = i.id_product where name like '%$keyword%' or price like '%$keyword%' group by p.id");
 		while ($row = $products->fetch_object()){
-			$assignees = explode(',', $row->images);
-			$row->images = $assignees;
+			
 		    $product[] = $row;
 		}
 		echo (json_encode($product));

@@ -12,11 +12,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageProfile: {
-        width: 150,
-        height: 150,
+        width: 140,
+        height: 140,
         borderRadius: 100,
-
-
+        marginTop: 13
     },
     viewImage: {
         flex: 2,
@@ -28,14 +27,12 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         backgroundColor: 'white',
-        width:200,
-        height: '8%',
+        width: 200,
+        height: '10%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
         margin: 5
-
-
     },
     viewButton: {
         margin: 10,
@@ -60,12 +57,12 @@ const styles = StyleSheet.create({
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = { user: null };   
+        this.state = { user: null };
         global.onSignIn = this.onSignIn.bind(this);
     }
 
     onSignIn(user) {
-        this.setState({ user});
+        this.setState({ user });
     }
     gotoAuthentication() {
         const { navigator } = this.props;
@@ -73,19 +70,19 @@ class Menu extends Component {
     }
     gotoAddProduct() {
         const { navigator } = this.props;
-        navigator.push({ name: 'THEM_SAN_PHAM' });
+        navigator.push({ name: 'ADD_PRODUCT' });
     }
     gotoListProduct() {
         const { navigator } = this.props;
-        navigator.push({ name: 'DANH_SACH_SAN_PHAM' });
+        navigator.push({ name: 'LIST_PRODUCT' });
     }
     gotoListOrder() {
         const { navigator } = this.props;
-        navigator.push({ name: 'DANH_SACH_Order' });
+        navigator.push({ name: 'LIST_ORDER' });
     }
     gotoChangeInfo() {
         const { navigator } = this.props;
-        navigator.push({ name: 'CHANGE_INFO',user: this.state.user });
+        navigator.push({ name: 'CHANGE_INFO', user: this.state.user });
     }
     gotoOrderHistory() {
         const { navigator } = this.props;
@@ -98,14 +95,14 @@ class Menu extends Component {
     render() {
         const logoutJSX = (
             <View style={styles.buttonStyle}>
-                <TouchableOpacity style={{ marginTop: 4 , alignItems:'center'}} onPress={this.gotoAuthentication.bind(this)}>
+                <TouchableOpacity style={{ marginTop: 4, alignItems: 'center' }} onPress={this.gotoAuthentication.bind(this)}>
                     <Text style={styles.textButton}>Sign In</Text>
                 </TouchableOpacity>
             </View>
         );
         const { user } = this.state;
         const loginJSX = (
-            <View style={{flex: 1,justifyContent:'space-between', alignItems:'center'}}>
+            <View style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={{ color: '#fff', marginTop: 20, fontSize: 20 }}>{user ? user.name : ""}</Text>
                 <View style={styles.viewButton}>
                     <TouchableOpacity style={styles.buttonStyle} onPress={this.gotoOrderHistory.bind(this)}>
@@ -133,7 +130,7 @@ class Menu extends Component {
         return (
             <View style={styles.container}>
                 <Image source={profileIcon} style={styles.imageProfile} />
-                { mainJSX } 
+                {mainJSX}
             </View>
         );
     }

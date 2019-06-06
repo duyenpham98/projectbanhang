@@ -16,9 +16,9 @@ export default class OrderHistory extends Component {
     }
     componentDidMount() {
         getToken()
-        .then(token => getOrderHistory(token))
-        .then(arrOrder => this.setState({ arrOrder }))
-        .catch(err => console.log(err));
+            .then(token => getOrderHistory(token))
+            .then(arrOrder => this.setState({ arrOrder }))
+            .catch(err => console.log(err));
     }
     render() {
         const { wrapper, header, headerTitle, backIconStyle, body, orderRow } = styles;
@@ -32,8 +32,8 @@ export default class OrderHistory extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={body}>
-                <ScrollView>
-                        { this.state.arrOrder.map(e => (
+                    <ScrollView>
+                        {this.state.arrOrder.map(e => (
                             <View style={orderRow} key={e.id}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
@@ -52,7 +52,7 @@ export default class OrderHistory extends Component {
                                     <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}$</Text>
                                 </View>
                             </View>
-                        )) }
+                        ))}
                     </ScrollView>
                 </View>
             </View>

@@ -9,7 +9,6 @@
 	$material = $obj["material"];
 	$description = $obj["description"];
 	$new = $obj["new"];
-	
 	$inCollection = $obj["inCollection"];
 	if($name != "" && $id_type != "" && $price != "" && $color != "" && $material != "" && $description != "" && $new != "" && $inCollection != "")	{
 	
@@ -25,7 +24,5 @@
 	else{
 		echo 'KHONG_THANH_CONG';
 	}
-	$sql1 = "SELECT * FROM product ";
-	$result1 = $mysqli->query($sql1);
-
+	
 ?>

@@ -12,7 +12,6 @@ import saveToken from '../../api/saveToken';
 import global from '../global';
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import signIn from '../../api/signIn';
-
 import { GoogleSignin } from 'react-native-google-signin';
 export default class SignIn extends React.Component {
 
@@ -22,60 +21,69 @@ export default class SignIn extends React.Component {
             email: "",
             password: "",
             accessToken: null,
-            user: null
+            user: null,
+            userInfo: {}
         }
     }
     componentWillMount() {
-        GoogleSignin.hasPlayServices({ autoResolve: true });
-        GoogleSignin.configure({
-          webClientId: '731795877247-4t9lancq3e2ld93491t83o7sio58mmhe.apps.googleusercontent.com'
-        })
-      }
+        try {
+            GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+            GoogleSignin.configure({
+                webClientId: '731795877247-4t9lancq3e2ld93491t83o7sio58mmhe.apps.googleusercontent.com',
+                offlineAccess: true,
+            })
+        } catch (err) {
+            console.log('Something wrong with google play service!', { err })
+        }
+    }
     handleSigninGoogle() {
-        GoogleSignin.signIn().then((user) => { 
-          console.log(user);
-          global.onSignIn(user.email);
+        GoogleSignin.signIn().then((googleUser) => {
+            this.setState({
+                userInfo: googleUser.user,
+            })
+            global.onSignIn(this.state.userInfo);
+            console.log('email', this.state.userInfo.email);
+            console.log('name', this.state.userInfo.name);
+            console.log('photo', this.state.userInfo.photo);
+            this.props.goBackToMain();
         }).catch((err) => {
-          console.log('WRONG SIGNIN', err);
+            console.log('WRONG SIGNIN', err);
         }).done();
-        this.props.goBackToMain();
-         
-      }
-    
+
+    }
     async fbAuth() {
         try {
-            let result = await LoginManager.logInWithReadPermissions(['public_profile','email'])
+            let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email'])
             if (result.isCancelled) {
                 alert("Log in cancelled");
             }
             else {
                 AccessToken
-                .getCurrentAccessToken()
-                .then((user) => {
-                    alert("Facebook accessToken:\n" + user.accessToken + "\n\naccessTokenSource: " + user.accessTokenSource + "\n\nuserID: " + user.userID)
-                    console.log(user);
-                    global.onSignIn(user.userID);
-                    this.props.goBackToMain();
-                    saveToken(user.accessToken);
-                    return user
-                })
-                
+                    .getCurrentAccessToken()
+                    .then((user) => {
+                        alert("Facebook accessToken:\n" + user.accessToken + "\n\naccessTokenSource: " + user.accessTokenSource + "\n\nuserID: " + user.userID)
+                        console.log(user);
+                        global.onSignIn(user.userID);
+                        this.props.goBackToMain();
+                        saveToken(user.accessToken);
+                        return user
+                    })
+
             }
         } catch (error) {
             alert("Login failed with error" + error);
         }
     }
-   
     onSignIn() {
         const { email, password } = this.state;
 
         if (email == '') {
-            alert("Email không được trống");
+            alert("Email must not be empty");
         }
         if (password == '') {
-            alert("Password không được trống");
+            alert("Password must not be empty");
         }
-         else {
+        else {
             signIn(email, password)
                 .then(res => {
                     global.onSignIn(res.user);
@@ -111,21 +119,18 @@ export default class SignIn extends React.Component {
                     />
                     <View style={styles.button}>
                         <View style={styles.btndangnhap}>
-                            <TouchableOpacity onPress={this.onSignIn.bind(this)}
-                            >
+                            <TouchableOpacity onPress={this.onSignIn.bind(this)}>
                                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in</Text>
                             </TouchableOpacity>
 
                         </View>
                         <View style={styles.btndangnhap}>
-                            <TouchableOpacity onPress={this.fbAuth.bind(this)}
-                            >
+                            <TouchableOpacity onPress={this.fbAuth.bind(this)}>
                                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in with facebook</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.btndangnhap}>
-                            <TouchableOpacity onPress={() => this.handleSigninGoogle()}
-                            >
+                            <TouchableOpacity onPress={() => this.handleSigninGoogle()}>
                                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in with Google +</Text>
                             </TouchableOpacity>
                         </View>
@@ -135,15 +140,15 @@ export default class SignIn extends React.Component {
                 </View>
 
             </View >
-            
+
         );
-       
+
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,// co giản màn hình
+        flex: 1,
         backgroundColor: '#E8E8E8',
     },
 
@@ -153,11 +158,7 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 80,
         height: 200,
-    },
-    logo: {
-        width: 100,
-        height: 100
-
+        marginBottom: 15,
     },
     username: {
         borderColor: 'gray',

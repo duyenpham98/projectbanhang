@@ -2,16 +2,16 @@ import saveToken from './saveToken';
 import getToken from './getToken';
 
 const getNewToken = (token) => (
-    fetch('http://192.168.100.4/react-native/app/refresh_token.php',
-    {   
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify({ token })
-    })
-    .then(res => res.text())
+    fetch('http://192.168.100.6/react-native/app/refresh_token.php',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify({ token })
+        })
+        .then(res => res.text())
 );
 
 const refreshToken = async () => {

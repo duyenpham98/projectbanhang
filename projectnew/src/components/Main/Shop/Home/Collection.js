@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { View, Text,Image,Dimensions,StyleSheet,TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import bannerImage from '../../../../media/temp/h5.jpg';
 const { height } = Dimensions.get('window');
 export default class Collection extends React.Component {
@@ -7,7 +7,7 @@ export default class Collection extends React.Component {
         const { navigator } = this.props;
         navigator.push({ name: 'LIST_PRODUCT', category: { name: 'SPRING COLLECTION', id: 'COLLECTION' } });
     }
-    render(){
+    render() {
         return (
             <View style={styles.wrapper}>
                 <View style={{ flex: 1, padding: 5, paddingLeft: 0 }}>
