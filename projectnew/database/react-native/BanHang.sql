@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2019 at 08:38 AM
+-- Generation Time: Jun 05, 2019 at 04:12 AM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `bill` (
   `total` float NOT NULL DEFAULT '0',
   `note` text COLLATE utf8mb4_unicode_ci,
   `status` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bill`
@@ -41,7 +41,10 @@ CREATE TABLE IF NOT EXISTS `bill` (
 
 INSERT INTO `bill` (`id`, `id_customer`, `date_order`, `total`, `note`, `status`) VALUES
 (2, 4, '2019-05-16 01:29:51', 267, NULL, NULL),
-(3, 4, '2019-05-21 03:38:08', 143, NULL, NULL);
+(3, 4, '2019-05-21 03:38:08', 143, NULL, NULL),
+(4, 6, '2019-05-23 03:44:51', 124, NULL, NULL),
+(5, 7, '2019-05-30 01:34:38', 143, NULL, NULL),
+(6, 7, '2019-06-05 10:50:34', 281, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -55,17 +58,21 @@ CREATE TABLE IF NOT EXISTS `bill_detail` (
   `id_product` int(11) NOT NULL,
   `quantity` float NOT NULL DEFAULT '0',
   `price` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bill_detail`
 --
 
 INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `price`) VALUES
-(1, 1, 1, 2, 124),
-(2, 2, 2, 1, 124),
+(1, 1, 5, 2, 124),
+(2, 2, 9, 1, 124),
 (3, 2, 3, 1, 143),
-(4, 3, 3, 2, 143);
+(4, 3, 3, 2, 143),
+(5, 4, 8, 1, 124),
+(6, 5, 3, 2, 143),
+(7, 6, 6, 1, 135),
+(8, 6, 7, 2, 146);
 
 -- --------------------------------------------------------
 
@@ -77,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_product` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `images`
@@ -94,7 +101,11 @@ INSERT INTO `images` (`id`, `link`, `id_product`) VALUES
 (8, '61.jpeg', 8),
 (9, '62.jpeg', 9),
 (10, '63.jpeg', 10),
-(11, '64.jpeg', 11);
+(11, '64.jpeg', 11),
+(12, '65.jpeg', 12),
+(13, '66.jpeg', 13),
+(14, '67.jpeg', 14),
+(15, '70.jpeg', 15);
 
 -- --------------------------------------------------------
 
@@ -112,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `new` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `inCollection` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product`
@@ -125,8 +136,12 @@ INSERT INTO `product` (`id`, `name`, `id_type`, `price`, `color`, `material`, `d
 (7, 'floral print s', '2', '146', 'DarkGoldenRod', 'silk', 'Let your shoulder steal the show in this sweet and sultry maxi dress featuring a smocked bodice and flowing skirt. The soft, stretchy fabric offers a perfectly comfortable fit every time, while a bold print keeps eyes on you.', '1', '0'),
 (8, 'asymmetrical g', '2', '124', 'MediumSeaGreen', 'leather', 'Walk into the club or a party in confidence. An asymmetrical design adds modern flair to your look, while sleek fabric drapes over your curves comfortably. Metallic sheen draws the eye for a show-stopping ensemble.', '1', '0'),
 (9, 'lace trim surp', '1', '107', 'Khaki', 'silk', 'Keep up that confidence on the breeziest evenings with this one-piece. It features the feminine charm of a wrap skirt with the coverage of shorts underneath. Pair its sexy plunging neckline with a lacy bralette to really turn up the heat.', '1', '0'),
-(10, 'floral print s', '1', '123', 'RedDarkGoldenRod', 'cotton', 'Let your shoulder steal the show in this sweet and sultry maxi dress featuring a smocked bodice and flowing skirt. The soft, stretchy fabric offers a perfectly comfortable fit every time, while a bold print keeps eyes on you.', '1', '0'),
-(11, 'cold shoulder ', '3', '125', 'Magenta', 'silk', 'A floor-sweeping silhouette with easy wearability and a touch of elegance. The graceful flowing shape moves beautifully with each step, while cold shoulder sleeves make it flirty and fun. Glam it up with a few jewels for any special occasion.a', '0', '1');
+(10, 'floral print s', '1', '123', 'Red', 'cotton', 'Let your shoulder steal the show in this sweet and sultry maxi dress featuring a smocked bodice and flowing skirt. The soft, stretchy fabric offers a perfectly comfortable fit every time, while a bold print keeps eyes on you.', '1', '0'),
+(11, 'cold shoulder ', '3', '125', 'Magenta', 'silk', 'A floor-sweeping silhouette with easy wearability and a touch of elegance. The graceful flowing shape moves beautifully with each step, while cold shoulder sleeves make it flirty and fun. Glam it up with a few jewels for any special occasion.a', '0', '1'),
+(12, 'chiffon halter', '3', '156', 'Cyan', 'polyesters', 'A long, flowy look with a skin-baring retro vibe, this square neck halter maxi dress is a guaranteed head-turner. Best way to turn up the drama while wearing this one? Polished bangles and a gentle breeze.', '0', '1'),
+(13, 'cold shoulder ', '3', '147', 'Magenta', 'silk', 'A floor-sweeping silhouette with easy wearability and a touch of elegance. The graceful flowing shape moves beautifully with each step, while cold shoulder sleeves make it flirty and fun. Glam it up with a few jewels for any special occasion.a', '0', '0'),
+(14, 'chiffon halter', '1', '189', 'Cyan', 'polyesters', 'A long, flowy look with a skin-baring retro vibe, this square neck halter maxi dress is a guaranteed head-turner. Best way to turn up the drama while wearing this one? Polished bangles and a gentle breeze.', '0', '1'),
+(15, 'mesh embellish', '2', '149', 'Gainsboro', 'leather', 'Turn heads at your next get-together. Stretch-enhanced fabric clings to your curves for a slinky silhouette, while mesh panels reveal flirty peeks of skin. A circular design commands attention whether you''re on the dance floor or sipping champagne.', '1', '0');
 
 -- --------------------------------------------------------
 
@@ -169,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`) VALUES
-(4, 'duyenpham@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'duyen', 'HCM', '2111111'),
+(4, 'duyenpham@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'duyen', '0999999', 'HCM'),
 (6, 'hvgiang@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'giang', '0444444', 'Thu Duc'),
 (7, 'duyen@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'duyen', '0111111', 'thu duc');
 
@@ -221,22 +236,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `product_type`
 --

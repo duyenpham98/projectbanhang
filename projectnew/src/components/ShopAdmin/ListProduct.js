@@ -12,7 +12,10 @@ class ListProduct extends Component {
             state: false,
         }
     }
-
+    gotoUpdate(product) {
+        const { navigator } = this.props;
+        navigator.push({ name: 'UPDATE_PRODUCT', product });
+    }
     // Phương thuc xoa dư lieu
     Delete_product(id) {
         fetch('http://192.168.100.6/react-native/app/delete_product.php', {
@@ -34,20 +37,20 @@ class ListProduct extends Component {
 
     }
 
-    Delete(id){
+    Delete(id) {
         Alert.alert(
             'Delete Product',
             'Do you want delete this product?',
             [
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: ()=>this.Delete_product(id)},
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => this.Delete_product(id) },
             ],
-            {cancelable: false},
-          );
+            { cancelable: false },
+        );
     }
     goBack() {
         const { navigator } = this.props;
@@ -90,19 +93,21 @@ class ListProduct extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
-                        <View style={styles.wrapper1}>
-                            <View style={styles.imageContainer}>
-                                <TouchableOpacity style={styles.touch} onPress={() => this.Delete(item.id)} >
-                                    <Text style={{ fontSize: 20, color: '#EE2C2C' }}>x</Text>
-                                </TouchableOpacity>
-                                <Image source={{ uri: `${url}${item.link}` }} style={styles.imageStyle} />
-                            </View>
+                        <TouchableOpacity onPress={() => this.gotoUpdate(item)}>
+                            <View style={styles.wrapper1}>
+                                <View style={styles.imageContainer}>
+                                    <TouchableOpacity style={styles.touch} onPress={() => this.Delete(item.id)} >
+                                        <Text style={{ fontSize: 20, color: '#EE2C2C' }}>x</Text>
+                                    </TouchableOpacity>
+                                    <Image source={{ uri: `${url}${item.link}` }} style={styles.imageStyle} />
+                                </View>
 
-                            <View style={styles.footer}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.price}>{item.price}$</Text>
+                                <View style={styles.footer}>
+                                    <Text style={styles.name}>{item.name}</Text>
+                                    <Text style={styles.price}>{item.price}$</Text>
+                                </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     }
                     keyExtractor={({ id }, index) => id}
 

@@ -47,7 +47,7 @@ export default class SignIn extends React.Component {
             console.log('photo', this.state.userInfo.photo);
             this.props.goBackToMain();
         }).catch((err) => {
-            console.log('WRONG SIGNIN', err);
+            alert('WRONG SIGNIN', err);
         }).done();
 
     }

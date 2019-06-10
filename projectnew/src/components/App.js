@@ -9,6 +9,7 @@ import AddProduct from './ShopAdmin/AddProduct';
 import ListProduct from './ShopAdmin/ListProduct';
 import ListOrder from './ShopAdmin/ListOrder';
 import Bill_Detail from './ShopAdmin/Bill_Detail';
+import Update_product from './ShopAdmin/Update_product';
 export default class App extends React.Component {
 
     componentDidMount() {
@@ -27,6 +28,7 @@ export default class App extends React.Component {
                         case 'LIST_PRODUCT': return <ListProduct navigator={navigator} />;
                         case 'LIST_ORDER': return <ListOrder navigator={navigator} />;
                         case 'BILL_DETAIL': return <Bill_Detail navigator={navigator} bill={route.bill} />;
+                        case 'UPDATE_PRODUCT': return <Update_product navigator={navigator} product={route.product} />;
                         default: return <OrderHistory navigator={navigator} />;
                     }
                 }}

@@ -26,6 +26,21 @@ class CartView extends Component {
     removeProduct(id) {
         global.removeProduct(id);
     }
+    removeProduct_Cart(id){
+        Alert.alert(
+            'Confirm',
+            'Do you want remove product from the shopping cart?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: ()=>this.removeProduct(id)},
+            ],
+            { cancelable: false },
+        );
+    }
     async onSendOrder() {
         try {
             const token = await getToken();
@@ -78,7 +93,7 @@ class CartView extends Component {
                             <View style={[mainRight]}>
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(item.product.name)}</Text>
-                                    <TouchableOpacity onPress={() => this.removeProduct(item.product.id)}>
+                                    <TouchableOpacity onPress={() => this.removeProduct_Cart(item.product.id)}>
                                         <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                     </TouchableOpacity>
                                 </View>

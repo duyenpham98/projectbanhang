@@ -1,8 +1,7 @@
 <?php
 
 	include('connect/connect.php');
-
-	$sql = "select product.id, images.id , images.link , product.name , product.color, product.price
+	$sql = "select product.id, images.link , product.name , product.color,product.id_type, product.price,product.material,product.description,product.news,product.inCollection
 from product
 inner join images on product.id = images.id_product;";
  
