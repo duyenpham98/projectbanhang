@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions ,Alert} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import RNFetchBlob from 'react-native-fetch-blob';
@@ -54,10 +54,10 @@ class AddProduct extends Component {
             alert("Product collection must not be empty");
         }
         if (this.state.imageSource == null) {
-            alert('Please select the appropriate picture');
+            alert('Please select a product image to add');
         }
         else {
-            fetch('http://192.168.100.6/react-native/app/add_product.php', {
+            fetch('http://192.168.100.7/react-native/app/add_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -83,7 +83,6 @@ class AddProduct extends Component {
                     this.setState({ description: "" });
                     this.setState({ news: "" });
                     this.setState({ collection: "" });
-
                     onPress = this.uploadPhoto();
                     alert("add product success");
                 })
@@ -91,6 +90,21 @@ class AddProduct extends Component {
                     console.error(error);
                 });
         }
+    }
+    success_add_product(){
+        Alert.alert(
+            'Add Product',
+            'Do you want add product?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => this.add_product() },
+            ],
+            { cancelable: false },
+        );
     }
     selectPhoto() {
         ImagePicker.showImagePicker(options, (response) => {
@@ -111,8 +125,8 @@ class AddProduct extends Component {
             }
         });
     }
-    uploadPhoto() {  
-        RNFetchBlob.fetch('POST', 'http://192.168.100.6/react-native/app/upload_file.php', {
+    uploadPhoto() {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.7/react-native/app/upload_file.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',
@@ -224,7 +238,7 @@ class AddProduct extends Component {
                         returnKeyType='next'
                         autoCorrect={false}//không hiện ra gợi ý khi nhập
                     />
-                    <TouchableOpacity style={mapContainer1} onPress={this.add_product.bind(this)}>
+                    <TouchableOpacity style={mapContainer1} onPress={this.success_add_product.bind(this)}>
                         <Text>ADD PRODUCT</Text>
                     </TouchableOpacity>
                 </View>

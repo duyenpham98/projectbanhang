@@ -16,6 +16,9 @@ class Contact extends Component {
             <View style={wrapper}>
                 <View style={mapContainer}>
                     <MapView
+                        showsUserLocation={false}
+                        zoomEnabled={true}
+                        zoomControlEnabled={true}
                         style={{ width: width - 30, height: 185 }}
                         initialRegion={{
                             latitude: 37.78825,

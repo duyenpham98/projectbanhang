@@ -42,7 +42,7 @@ export default class SignUp extends React.Component {
             alert("Password must be more than 6 characters");
         }
         else {
-            fetch('http://192.168.100.6/react-native/app/register.php', {
+            fetch('http://192.168.100.7/react-native/app/register.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import saveToken from '../../api/saveToken';
 import global from '../global';
-import { LoginManager, AccessToken } from "react-native-fbsdk";
+import { LoginManager, AccessToken ,GraphRequest,GraphRequestManager} from "react-native-fbsdk";
 import signIn from '../../api/signIn';
 import { GoogleSignin } from 'react-native-google-signin';
 export default class SignIn extends React.Component {
@@ -22,7 +22,7 @@ export default class SignIn extends React.Component {
             password: "",
             accessToken: null,
             user: null,
-            userInfo: {}
+            userInfo: {},
         }
     }
     componentWillMount() {
@@ -51,9 +51,10 @@ export default class SignIn extends React.Component {
         }).done();
 
     }
+    
     async fbAuth() {
         try {
-            let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email'])
+            let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email','user_friends'])
             if (result.isCancelled) {
                 alert("Log in cancelled");
             }
@@ -61,14 +62,25 @@ export default class SignIn extends React.Component {
                 AccessToken
                     .getCurrentAccessToken()
                     .then((user) => {
-                        alert("Facebook accessToken:\n" + user.accessToken + "\n\naccessTokenSource: " + user.accessTokenSource + "\n\nuserID: " + user.userID)
+                        //alert("Facebook accessToken:\n" + user.accessToken + "\n\naccessTokenSource: " + user.accessTokenSource + "\n\nuserID: " + user.userID)
                         console.log(user);
-                        global.onSignIn(user.userID);
+                        const processRequest = new GraphRequest(
+                            '/me?fields=name,picture.type(large)',
+                            null,
+                            get_Response_Info = (error, result) => {
+                                if (error) {
+                                  Alert.alert('Error fetching data: ' + error.toString());
+                                } else {
+                                  global.onSignIn(result);
+                                  console.log(result);
+                                }
+                              }
+                          );
+                          new GraphRequestManager().addRequest(processRequest).start();
                         this.props.goBackToMain();
                         saveToken(user.accessToken);
-                        return user
+                        return user;
                     })
-
             }
         } catch (error) {
             alert("Login failed with error" + error);

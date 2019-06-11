@@ -13,7 +13,7 @@ class Bill_Detail extends Component {
     }
 
     Delete_bill_detail(id) {
-        fetch('http://192.168.100.6/react-native/app/delete_bill_detail.php', {
+        fetch('http://192.168.100.7/react-native/app/delete_bill_detail.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
