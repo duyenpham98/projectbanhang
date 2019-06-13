@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import saveToken from '../../api/saveToken';
 import global from '../global';
-import { LoginManager, AccessToken ,GraphRequest,GraphRequestManager} from "react-native-fbsdk";
+import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
 import signIn from '../../api/signIn';
 import { GoogleSignin } from 'react-native-google-signin';
 export default class SignIn extends React.Component {
@@ -51,10 +51,10 @@ export default class SignIn extends React.Component {
         }).done();
 
     }
-    
+
     async fbAuth() {
         try {
-            let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email','user_friends'])
+            let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email', 'user_friends'])
             if (result.isCancelled) {
                 alert("Log in cancelled");
             }
@@ -62,21 +62,20 @@ export default class SignIn extends React.Component {
                 AccessToken
                     .getCurrentAccessToken()
                     .then((user) => {
-                        //alert("Facebook accessToken:\n" + user.accessToken + "\n\naccessTokenSource: " + user.accessTokenSource + "\n\nuserID: " + user.userID)
                         console.log(user);
                         const processRequest = new GraphRequest(
                             '/me?fields=name,picture.type(large)',
                             null,
                             get_Response_Info = (error, result) => {
                                 if (error) {
-                                  Alert.alert('Error fetching data: ' + error.toString());
+                                    Alert.alert('Error fetching data: ' + error.toString());
                                 } else {
-                                  global.onSignIn(result);
-                                  console.log(result);
+                                    global.onSignIn(result);
+                                    console.log(result);
                                 }
-                              }
-                          );
-                          new GraphRequestManager().addRequest(processRequest).start();
+                            }
+                        );
+                        new GraphRequestManager().addRequest(processRequest).start();
                         this.props.goBackToMain();
                         saveToken(user.accessToken);
                         return user;
@@ -88,7 +87,6 @@ export default class SignIn extends React.Component {
     }
     onSignIn() {
         const { email, password } = this.state;
-
         if (email == '') {
             alert("Email must not be empty");
         }
@@ -114,39 +112,42 @@ export default class SignIn extends React.Component {
                         onChangeText={(email) => this.setState({ email })}
                         value={this.state.email}
                         placeholder='Email'
-                        placeholderTextColor='#CD8500'
+                        placeholderTextColor='#1C1C1C'
                         autoFocus={true}
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.password.focus()}
                     />
                     <TextInput style={styles.passwrod}
                         onChangeText={(password) => this.setState({ password })}
                         value={this.state.password}
                         placeholder='Password'
-                        placeholderTextColor='#CD8500'
+                        placeholderTextColor='#1C1C1C'
                         returnKeyType='next'
                         secureTextEntry={true}
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                     />
                     <View style={styles.button}>
                         <View style={styles.btndangnhap}>
                             <TouchableOpacity onPress={this.onSignIn.bind(this)}>
                                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in</Text>
                             </TouchableOpacity>
-
                         </View>
-                        <View style={styles.btndangnhap}>
-                            <TouchableOpacity onPress={this.fbAuth.bind(this)}>
-                                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in with facebook</Text>
-                            </TouchableOpacity>
+                        <View style={styles.textOr}>
+                            <Text style={styles.dangnhap}>--------------Or You can login through--------------</Text>
                         </View>
-                        <View style={styles.btndangnhap}>
-                            <TouchableOpacity onPress={() => this.handleSigninGoogle()}>
-                                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Sign in with Google +</Text>
-                            </TouchableOpacity>
+                        <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row' }}>
+                            <View style={styles.btndangnhapfb}>
+                                <TouchableOpacity onPress={this.fbAuth.bind(this)}>
+                                    <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Facebook</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.btndangnhapgg}>
+                                <TouchableOpacity onPress={() => this.handleSigninGoogle()}>
+                                    <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center', paddingTop: 5 }}>Google +</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-
                     </View>
 
                 </View>
@@ -195,17 +196,46 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        flexDirection: 'column',
+        alignItems: 'center',
     },
     btndangnhap: {
         borderColor: 'gray',
         marginTop: 5,
         borderWidth: 1,
         margin: 20,
-        borderRadius: 20,
         height: 40,
         marginBottom: 5,
-        backgroundColor: '#c0b01d',
+        backgroundColor: '#5CACEE',
+        width: 150,
+        alignItems: 'center',
+    },
+    btndangnhapfb: {
+        borderColor: 'gray',
+        marginTop: 5,
+        borderWidth: 1,
+        margin: 20,
+        height: 40,
+        marginBottom: 5,
+        backgroundColor: '#0066CC',
+        width: 130
     },
 
+    btndangnhapgg: {
+        borderColor: 'gray',
+        marginTop: 5,
+        borderWidth: 1,
+        margin: 20,
+        height: 40,
+        marginBottom: 5,
+        backgroundColor: '#FF3030',
+        width: 130
+    },
+    dangnhap: {
+        fontSize: 15,
+        color: '#0066CC',
+    },
+    textOr: {
+        marginBottom: 5,
+        marginTop: 10,
+    },
 });

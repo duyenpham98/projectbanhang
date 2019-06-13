@@ -1,17 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 export default class SignUp extends React.Component {
-    static navigationOptions = {
-        title: 'Registration', // to add letter spacing on Android
-        headerStyle: {
-            backgroundColor: '#0b2e05',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            marginLeft: 70
-        },
-    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -42,7 +32,7 @@ export default class SignUp extends React.Component {
             alert("Password must be more than 6 characters");
         }
         else {
-            fetch('http://192.168.100.7/react-native/app/register.php', {
+            fetch('http://192.168.100.8/react-native/app/register.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -77,53 +67,53 @@ export default class SignUp extends React.Component {
                     onChangeText={(name) => this.setState({ name })}
                     value={this.state.name}
                     placeholder='Name'
-                    placeholderTextColor='#CD8500'
+                    placeholderTextColor='#1C1C1C'
                     autoFocus={true}
                     returnKeyType='next'
-                    autoCorrect={false}//không hiện ra gợi ý khi nhập
+                    autoCorrect={false}
                     onSubmitEditing={() => this.refs.email.focus()}
                 />
                 <TextInput style={styles.username}
                     onChangeText={(email) => this.setState({ email })}
                     value={this.state.email}
                     placeholder='Email'
-                    placeholderTextColor='#CD8500'
+                    placeholderTextColor='#1C1C1C'
                     returnKeyType='next'
-                    autoCorrect={false}//không hiện ra gợi ý khi nhập
+                    autoCorrect={false}
                     onSubmitEditing={() => this.refs.password.focus()}
                 />
                 <TextInput style={styles.matkhau}
                     onChangeText={(password) => this.setState({ password })}
                     value={this.state.password}
                     placeholder='Password'
-                    placeholderTextColor='#CD8500'
+                    placeholderTextColor='#1C1C1C'
                     returnKeyType='next'
                     secureTextEntry={true}
-                    autoCorrect={false}//không hiện ra gợi ý khi nhập
+                    autoCorrect={false}
                     onSubmitEditing={() => this.refs.phone.focus()}
                 />
                 <TextInput style={styles.phone}
                     onChangeText={(phone) => this.setState({ phone })}
                     value={this.state.phone}
                     placeholder='Phone'
-                    placeholderTextColor='#CD8500'
+                    placeholderTextColor='#1C1C1C'
                     returnKeyType='next'
-                    autoCorrect={false}//không hiện ra gợi ý khi nhập
+                    autoCorrect={false}
                     onSubmitEditing={() => this.refs.address.focus()}
                 />
                 <TextInput style={styles.address}
                     onChangeText={(address) => this.setState({ address })}
                     value={this.state.address}
                     placeholder='Address'
-                    placeholderTextColor='#CD8500'
+                    placeholderTextColor='#1C1C1C'
                     returnKeyType='next'
-                    autoCorrect={false}//không hiện ra gợi ý khi nhập
+                    autoCorrect={false}
                 />
-                <View style={{ flexDirection: 'column' , flex: 1 , marginLeft: 25, marginRight: 25 , marginBottom: 10}}>
+                <View style={{ flexDirection: 'column', flex: 1, marginLeft: 20, marginRight: 20, marginBottom: 10 }}>
                     <View style={styles.btnxacnhan}>
                         <TouchableOpacity onPress={() => this.insertaccount()}
                         >
-                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', paddingTop: 5 }}>Sign UP</Text>
+                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', paddingTop: 5 }}>SIGN UP</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -184,12 +174,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10,
         height: 40,
-        backgroundColor: '#4d1c2f',
+        backgroundColor: '#5CACEE',
         borderRadius: 20,
     },
     logocontainer: {
         alignItems: 'center',
-        //justifyContent: 'center',
         marginTop: 60,
         flex: 1
 

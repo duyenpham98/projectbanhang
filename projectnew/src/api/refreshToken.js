@@ -2,7 +2,7 @@ import saveToken from './saveToken';
 import getToken from './getToken';
 
 const getNewToken = (token) => (
-    fetch('http://192.168.100.7/react-native/app/refresh_token.php',
+    fetch('http://192.168.100.8/react-native/app/refresh_token.php',
         {
             method: 'POST',
             headers: {

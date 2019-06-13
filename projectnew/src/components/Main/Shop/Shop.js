@@ -54,6 +54,7 @@ export default class Shop extends React.Component {
             { cartArray: this.state.cartArray.concat({ product, quantity: 1 }) },
             () => saveCart(this.state.cartArray)
         );
+        alert("Product has been put into cart");
     }
     incrQuantity(productId) {
         const newCart = this.state.cartArray.map(e => {

@@ -5,7 +5,6 @@ import phoneIcon from '../../../../media/appIcon/phone.png';
 import mailIcon from '../../../../media/appIcon/mail.png';
 import messageIcon from '../../../../media/appIcon/message.png';
 import locationIcon from '../../../../media/appIcon/location.png';
-
 class Contact extends Component {
     render() {
         const {
@@ -16,7 +15,7 @@ class Contact extends Component {
             <View style={wrapper}>
                 <View style={mapContainer}>
                     <MapView
-                        showsUserLocation={false}
+                        showsUserLocation={true}
                         zoomEnabled={true}
                         zoomControlEnabled={true}
                         style={{ width: width - 30, height: 185 }}

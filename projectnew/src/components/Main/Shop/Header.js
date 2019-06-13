@@ -1,5 +1,5 @@
 import React, { component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,TextInput,Dimensions} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
 import icLogo from '../../../media/appIcon/logo.png';
 import icMenu from '../../../media/appIcon/ic_menu.png';
 import global from '../../global';
@@ -16,8 +16,8 @@ export default class Header extends React.Component {
         const { txtSearch } = this.state;
         this.setState({ txtSearch: '' });
         search(txtSearch)
-        .then(arrProduct => global.setArraySearch(arrProduct))
-        .catch(err => console.log(err));
+            .then(arrProduct => global.setArraySearch(arrProduct))
+            .catch(err => console.log(err));
     }
     render() {
         return (
@@ -31,13 +31,13 @@ export default class Header extends React.Component {
                     <Image source={icLogo} style={styleHeader.iconStyle} />
                 </View>
                 <TextInput
-                   style={styleHeader.textInput}
-                   placeholder="What do you want to buy?"
-                   underlineColorAndroid="transparent"
-                   value={this.state.txtSearch}
-                   onChangeText={text => this.setState({ txtSearch: text })}
-                   onFocus={() => global.gotoSearch()} 
-                   onSubmitEditing={this.onSearch.bind(this)}
+                    style={styleHeader.textInput}
+                    placeholder="What do you want to buy?"
+                    underlineColorAndroid="transparent"
+                    value={this.state.txtSearch}
+                    onChangeText={text => this.setState({ txtSearch: text })}
+                    onFocus={() => global.gotoSearch()}
+                    onSubmitEditing={this.onSearch.bind(this)}
                 />
             </View>
 
@@ -46,7 +46,7 @@ export default class Header extends React.Component {
 }
 const styleHeader = StyleSheet.create({
     container: {
-        flex: 1,// co giản màn hình
+        flex: 1,
         backgroundColor: '#E8E8E8',
     },
     wrapp: {
@@ -73,10 +73,10 @@ const styleHeader = StyleSheet.create({
         height: 25,
         width: 25
     },
-    textInput: { 
-        height: height / 23, 
-        backgroundColor: '#FFF', 
+    textInput: {
+        height: height / 23,
+        backgroundColor: '#FFF',
         paddingLeft: 10,
-        paddingVertical: 0 
+        paddingVertical: 0
     },
 });

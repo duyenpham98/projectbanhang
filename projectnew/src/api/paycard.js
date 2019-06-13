@@ -1,7 +1,7 @@
-const sendOrder = (token, arrayDetail) => {
-    const data = { token, arrayDetail };
+const paycar = (token, cardnumber) => {
+    const data = { token, cardnumber };
     console.log(data);
-    return fetch('http://192.168.100.8/react-native/app/cart.php',
+    return fetch('http://192.168.100.8/react-native/app/paycard.php',
         {
             method: 'POST',
             headers: {
@@ -13,4 +13,4 @@ const sendOrder = (token, arrayDetail) => {
         .then(res => res.text())
 };
 
-module.exports = sendOrder;
+module.exports = paycar;

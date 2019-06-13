@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image, TouchableOpacity,Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
 import icLogo from '../../media/appIcon/logo.png';
 const back = require('../../media/appIcon/back.png');
 class ListOrder extends Component {
@@ -18,7 +18,7 @@ class ListOrder extends Component {
         navigator.pop();
     }
     Delete_bill(id) {
-        fetch('http://192.168.100.7/react-native/app/delete_bill.php', {
+        fetch('http://192.168.100.8/react-native/app/delete_bill.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -36,23 +36,23 @@ class ListOrder extends Component {
             });
 
     }
-    Delete(id){
+    Delete(id) {
         Alert.alert(
             'Delete Bill',
             'Do you want delete this bill?',
             [
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: ()=>this.Delete_bill(id)},
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => this.Delete_bill(id) },
             ],
-            {cancelable: false},
-          );
+            { cancelable: false },
+        );
     }
     componentDidMount() {
-        return fetch('http://192.168.100.7/react-native/app/bill_product.php')
+        return fetch('http://192.168.100.8/react-native/app/bill_product.php')
             .then((response) => response.json())
             .then((responseJson) => {
 
@@ -94,27 +94,31 @@ class ListOrder extends Component {
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
-                                    <Text style={{ color: '#2ABB9C',fontWeight: 'bold', fontSize: 16 }}>{item.id}</Text>
+                                    <Text style={{ color: '#528B8B', fontWeight: 'bold', fontSize: 16 }}>{item.id}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>{item.date_order}</Text>
+                                    <Text style={{ color: '#528B8B' }}>{item.date_order}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Name:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>{item.name}</Text>
+                                    <Text style={{ color: '#528B8B' }}>{item.name}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Phone:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>{item.phone}</Text>
+                                    <Text style={{ color: '#528B8B' }}>{item.phone}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Address:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>{item.address}</Text>
+                                    <Text style={{ color: '#528B8B' }}>{item.address}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Payment Method:</Text>
+                                    <Text style={{ color: '#528B8B' }}>{item.note}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
-                                    <Text style={{ color: '#2ABB9C', fontWeight: 'bold' }}>{item.total}$</Text>
+                                    <Text style={{ color: '#528B8B', fontWeight: 'bold' }}>{item.total}$</Text>
                                 </View>
                                 <View style={{ borderBottomColor: 'gray', borderBottomWidth: 1, paddingBottom: 10 }} />
                             </TouchableOpacity>
@@ -124,7 +128,6 @@ class ListOrder extends Component {
                     keyExtractor={({ id }, index) => id}
 
                 />
-
             </View>
 
         );

@@ -17,7 +17,7 @@ try{
 	}
 	else{
 		$email = $decoded->email;
-		$sql = "SELECT b.id, b.date_order, b.status, b.total FROM bill b INNER JOIN users u ON u.id=b.id_customer where u.email ='$email'";
+		$sql = "SELECT b.id, b.date_order, b.status, b.total, b.note FROM bill b INNER JOIN users u ON u.id=b.id_customer where u.email ='$email'";
 		$result = $mysqli->query($sql);
 		while ($row = $result->fetch_object()){
 		    $bill[] = $row;

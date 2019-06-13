@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2019 at 04:12 AM
+-- Generation Time: Jun 13, 2019 at 04:08 AM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -33,18 +33,19 @@ CREATE TABLE IF NOT EXISTS `bill` (
   `total` float NOT NULL DEFAULT '0',
   `note` text COLLATE utf8mb4_unicode_ci,
   `status` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bill`
 --
 
 INSERT INTO `bill` (`id`, `id_customer`, `date_order`, `total`, `note`, `status`) VALUES
-(2, 4, '2019-05-16 01:29:51', 267, NULL, NULL),
-(3, 4, '2019-05-21 03:38:08', 143, NULL, NULL),
-(4, 6, '2019-05-23 03:44:51', 124, NULL, NULL),
-(5, 7, '2019-05-30 01:34:38', 143, NULL, NULL),
-(6, 7, '2019-06-05 10:50:34', 281, NULL, NULL);
+(2, 4, '2019-05-16 01:29:51', 267, 'payment upon receipt', NULL),
+(3, 4, '2019-05-21 03:38:08', 143, 'card', NULL),
+(4, 6, '2019-05-23 03:44:51', 124, 'payment upon receipt', NULL),
+(5, 7, '2019-05-30 01:34:38', 143, 'card', NULL),
+(6, 7, '2019-06-05 10:50:34', 281, 'payment upon receipt', NULL),
+(7, 7, '2019-06-13 11:02:14', 143, 'card', NULL);
 
 -- --------------------------------------------------------
 
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `bill_detail` (
   `id_product` int(11) NOT NULL,
   `quantity` float NOT NULL DEFAULT '0',
   `price` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bill_detail`
@@ -72,7 +73,8 @@ INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `price`) V
 (5, 4, 8, 1, 124),
 (6, 5, 3, 2, 143),
 (7, 6, 6, 1, 135),
-(8, 6, 7, 2, 146);
+(8, 6, 7, 2, 146),
+(9, 7, 3, 1, 143);
 
 -- --------------------------------------------------------
 
@@ -84,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_product` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `images`
@@ -121,15 +123,15 @@ CREATE TABLE IF NOT EXISTS `product` (
   `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `material` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `new` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `news` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `inCollection` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `id_type`, `price`, `color`, `material`, `description`, `new`, `inCollection`) VALUES
+INSERT INTO `product` (`id`, `name`, `id_type`, `price`, `color`, `material`, `description`, `news`, `inCollection`) VALUES
 (3, 'star maxi dres', '2', '143', 'Wheat', 'fur', 'Command attention wherever you go in this dramatic maxi dress. A charming star design adds out-of-this-world appeal to your look, while a voluminous skirt sways with your every move.', '1', '0'),
 (5, 'tropical print', '1', '157', 'DarkOliveGreen', 'cotton', 'Weddings or island destinations, this dress is ready for anything. With plunging keyhole cut-outs and skin-baring strappy sides, less is more when it comes to this dramatic look. Add a fab heel, and you''ve got effortlessly glamorous style on lock.', '0', '0'),
 (6, 'high neck gode', '1', '135', 'DarkGreen', 'wool', 'A sexy, plunging neckline, open back and godet detailing on a flowing skirt...aka all the makings of our new favorite dress. Whisper-light with silky lining, this knockout number puts you at the center of attention every time. Be you, be fabulous.', '1', '1'),
@@ -236,22 +238,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `product_type`
 --

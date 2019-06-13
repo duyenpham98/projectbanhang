@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
 import icLogo from '../../media/appIcon/logo.png';
 
-const url = 'http://192.168.100.7/react-native/app/images/product/';
+const url = 'http://192.168.100.8/react-native/app/images/product/';
 const back = require('../../media/appIcon/back.png');
 class ListProduct extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class ListProduct extends Component {
     }
     // Phương thuc xoa dư lieu
     Delete_product(id) {
-        fetch('http://192.168.100.7/react-native/app/delete_product.php', {
+        fetch('http://192.168.100.8/react-native/app/delete_product.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -57,7 +57,7 @@ class ListProduct extends Component {
         navigator.pop();
     }
     componentDidMount() {
-        return fetch('http://192.168.100.7/react-native/app/listproduct.php')
+        return fetch('http://192.168.100.8/react-native/app/listproduct.php')
             .then((response) => response.json())
             .then((responseJson) => {
 

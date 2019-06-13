@@ -31,7 +31,7 @@ try{
 			$tongtien += $product['price'];
 		}
 		$todate = date('Y-m-d h:i:s');
-		$note = 'payment upon receipt';
+		$note = 'card';
 		if($tongtien > 0)
 		{
 		$sql = "INSERT INTO bill(id_customer,date_order, total, note) VALUES ($id_user, '$todate', $tongtien,'$note')";

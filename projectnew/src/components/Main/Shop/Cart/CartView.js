@@ -6,8 +6,9 @@ import {
 
 import global from '../../../global';
 import sendOrder from '../../../../api/sendOrder';
+import sendOrdercard from '../../../../api/sendOrdercard';
 import getToken from '../../../../api/getToken';
-const url = 'http://192.168.100.7/react-native/app/images/product/';
+const url = 'http://192.168.100.8/react-native/app/images/product/';
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
@@ -26,7 +27,7 @@ class CartView extends Component {
     removeProduct(id) {
         global.removeProduct(id);
     }
-    removeProduct_Cart(id){
+    removeProduct_Cart(id) {
         Alert.alert(
             'Confirm',
             'Do you want remove product from the shopping cart?',
@@ -36,7 +37,7 @@ class CartView extends Component {
                     onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
-                { text: 'OK', onPress: ()=>this.removeProduct(id)},
+                { text: 'OK', onPress: () => this.removeProduct(id) },
             ],
             { cancelable: false },
         );
@@ -48,28 +49,52 @@ class CartView extends Component {
                 id: e.product.id,
                 quantity: e.quantity
             }));
-            const kq = await sendOrder(token, arrayDetail);
-            if (kq === 'THEM_THANH_CONG') {
-                console.log('THEM THANH CONG');
-            } else {
-                console.log('THEM THAT BAI', kq);
+            if (arrayDetail.length == 0) {
+                alert("No product to order");
             }
+            const kq = await sendOrder(token, arrayDetail);
+           
         } catch (e) {
             console.log(e);
         }
+
+    }
+    async onSendOrdercard() {
+        try {
+            const token = await getToken();
+            const arrayDetail = this.props.cartArray.map(e => ({
+                id: e.product.id,
+                quantity: e.quantity
+            }));
+            if (arrayDetail.length == 0) {
+                alert("No product to order");
+            }
+            const kq = await sendOrdercard(token, arrayDetail);
+            //alert('Please enter your card information');
+        } catch (e) {
+            console.log(e);
+        }
+
     }
     sendOrder() {
         Alert.alert(
             'Confirm',
-            'Do you want to send this order?',
+            'Choose a Payment Method',
             [
+                {
+                    text: 'Payment by card',
+                    onPress: this.onSendOrdercard.bind(this)
+                },
                 {
                     text: 'Cancel',
                     onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
-                { text: 'OK', onPress: this.onSendOrder.bind(this)},
+                
+                { text: 'payment upon receipt', onPress: this.onSendOrder.bind(this) },
+                
             ],
+
             { cancelable: false },
         );
     }
@@ -94,7 +119,7 @@ class CartView extends Component {
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(item.product.name)}</Text>
                                     <TouchableOpacity onPress={() => this.removeProduct_Cart(item.product.id)}>
-                                        <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
+                                        <Text style={{ fontFamily: 'Avenir', color: 'red' }}>X</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>

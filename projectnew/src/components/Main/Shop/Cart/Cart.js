@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navigator } from 'react-native-deprecated-custom-components';
 import CartView from './CartView';
-
 import ProductDetail from '../ProductDetail/ProductDetail';
 class Cart extends Component {
     render() {

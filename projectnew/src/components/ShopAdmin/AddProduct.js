@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions ,Alert} from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import RNFetchBlob from 'react-native-fetch-blob';
@@ -57,7 +57,7 @@ class AddProduct extends Component {
             alert('Please select a product image to add');
         }
         else {
-            fetch('http://192.168.100.7/react-native/app/add_product.php', {
+            fetch('http://192.168.100.8/react-native/app/add_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -91,7 +91,7 @@ class AddProduct extends Component {
                 });
         }
     }
-    success_add_product(){
+    success_add_product() {
         Alert.alert(
             'Add Product',
             'Do you want add product?',
@@ -126,7 +126,7 @@ class AddProduct extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.7/react-native/app/upload_file.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.8/react-native/app/upload_file.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',
@@ -154,89 +154,77 @@ class AddProduct extends Component {
                     <Image source={icLogo} style={styles.iconStyle} />
                 </View>
                 <View style={wrapper}>
-                    <Image style={imageStyle} source={this.state.imageSource != null ? this.state.imageSource : require('./image/contact0.png')} />
+                    <Image style={imageStyle} source={this.state.imageSource != null ? this.state.imageSource : require('./image/download.jpeg')} />
                     <TouchableOpacity style={mapContainer} onPress={this.selectPhoto.bind(this)}>
                         <Text>SELECT</Text>
                     </TouchableOpacity>
-                    <Text>Name Product:</Text>
+                    <Text style={styles.textHead}>Name Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(name) => this.setState({ name })}
                         value={this.state.name}
-                        //placeholder='Name Product'
-                        placeholderTextColor='#CD8500'
                         autoFocus={true}
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.id_type.focus()}
                     />
-                    <Text>id_Type Product:</Text>
+                    <Text style={styles.textHead}>id_Type Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(id_type) => this.setState({ id_type })}
                         value={this.state.id_type}
-                        //placeholder='id_type Product'
-                        placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.color.focus()}
                     />
-                    <Text>Price Product:</Text>
+                    <Text style={styles.textHead}>Price Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(price) => this.setState({ price })}
                         value={this.state.price}
-                        //placeholder='Price Product'
-                        placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.color.focus()}
                     />
-                    <Text>Color Product:</Text>
+                    <Text style={styles.textHead}>Color Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(color) => this.setState({ color })}
                         value={this.state.color}
-                        //placeholder='color product'
-                        placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.material.focus()}
                     />
-                    <Text>Material Product:</Text>
+                    <Text style={styles.textHead}>Material Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(material) => this.setState({ material })}
                         value={this.state.material}
-                        //placeholder='material product'
-                        placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.description.focus()}
                     />
-                    <Text>Description Product:</Text>
+                    <Text style={styles.textHead}>Description Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(description) => this.setState({ description })}
                         value={this.state.description}
-                        //placeholder='description product'
-                        placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.new.focus()}
                     />
-                    <Text>New Product:</Text>
+                    <Text style={styles.textHead}>New Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(news) => this.setState({ news })}
                         value={this.state.news}
                         placeholder='0 or 1'
-                        placeholderTextColor='#CD8500'
+                        placeholderTextColor='#1C1C1C'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.collection.focus()}
                     />
-                    <Text>inCollection Product:</Text>
+                    <Text style={styles.textHead}>inCollection Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(collection) => this.setState({ collection })}
                         value={this.state.collection}
                         placeholder='0 or 1'
-                        placeholderTextColor='#CD8500'
+                        placeholderTextColor='#1C1C1C'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                     />
                     <TouchableOpacity style={mapContainer1} onPress={this.success_add_product.bind(this)}>
                         <Text>ADD PRODUCT</Text>
@@ -289,12 +277,11 @@ const styles = StyleSheet.create({
     mapContainer1: {
         marginHorizontal: 20,
         backgroundColor: '#2ABB9C',
-        borderRadius: 20,
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        width: 230,
+        width: 210,
         marginTop: 10,
     },
     textInput: {
@@ -307,6 +294,11 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: 'rgba(255,255,255,0.2)',
         borderRadius: 20,
+    },
+    textHead: {
+        fontSize: 16,
+        color: 'red',
+        fontWeight: 'bold'
     },
 });
 

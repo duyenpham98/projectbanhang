@@ -44,6 +44,10 @@ export default class OrderHistory extends Component {
                                     <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Payment Method:</Text>
+                                    <Text style={{ color: '#C21C70' }}>{e.note}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
                                     <Text style={{ color: '#2ABB9C' }}>{e.status ? 'Completed' : 'Pending'}</Text>
                                 </View>

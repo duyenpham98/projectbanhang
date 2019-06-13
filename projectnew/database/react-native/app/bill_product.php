@@ -2,7 +2,7 @@
 
 	include('connect/connect.php');
 
-	$sql = "select bill.id , bill.date_order , bill.total , users.name , users.phone , users.address 
+	$sql = "select bill.id , bill.date_order , bill.total,bill.note , users.name , users.phone , users.address 
 from users LEFT join bill on users.id = bill.id_customer;";
  
 	$result = $mysqli->query($sql);

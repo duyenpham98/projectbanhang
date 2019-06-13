@@ -8,7 +8,7 @@ import global from '../../../global';
 const back = require('../../../../media/appIcon/back.png');
 const cart = require('../../../../media/appIcon/cartfull.png');
 
-const url = 'http://192.168.100.7/react-native/app/images/product/';
+const url = 'http://192.168.100.8/react-native/app/images/product/';
 
 export default class ProductDetail extends Component {
     goBack() {

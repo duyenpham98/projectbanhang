@@ -5,7 +5,7 @@ import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-ha
 import RNFetchBlob from 'react-native-fetch-blob';
 import icLogo from '../../media/appIcon/logo.png';
 const back = require('../../media/appIcon/back.png');
-const url = 'http://192.168.100.7/react-native/app/images/product/';
+const url = 'http://192.168.100.8/react-native/app/images/product/';
 const options = {
     title: 'Select a photo',
     takePhotoButtonTitle: 'Take a photo',
@@ -51,7 +51,7 @@ class Update_product extends Component {
             alert("Product description must not be empty");
         }
         if (this.state.imageSource == null) {
-            fetch('http://192.168.100.7/react-native/app/update_product.php', {
+            fetch('http://192.168.100.8/react-native/app/update_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -78,7 +78,7 @@ class Update_product extends Component {
                 });
         }
         else {
-            fetch('http://192.168.100.7/react-native/app/update_product_image.php', {
+            fetch('http://192.168.100.8/react-native/app/update_product_image.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -127,7 +127,7 @@ class Update_product extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.7/react-native/app/upload_file_update_product.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.8/react-native/app/upload_file_update_product.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',
@@ -160,89 +160,82 @@ class Update_product extends Component {
                     <TouchableOpacity style={mapContainer} onPress={this.selectPhoto.bind(this)}>
                         <Text>SELECT</Text>
                     </TouchableOpacity>
-                    <Text>Name Product:</Text>
+                    <Text style={styles.textUpdate}>Name Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={name => this.setState({ ...this.state, name })}
                         value={this.state.name}
-                        //placeholder='Name Product'
                         placeholderTextColor='#CD8500'
                         autoFocus={true}
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.id_type.focus()}
                     />
-                    <Text>id_Type Product:</Text>
+                    <Text style={styles.textUpdate}>id_Type Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={id_type => this.setState({ ...this.state, id_type })}
                         value={this.state.id_type}
-                        //placeholder='id_type Product'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.color.focus()}
                     />
-                    <Text>Price Product:</Text>
+                    <Text style={styles.textUpdate}>Price Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={price => this.setState({ ...this.state, price })}
                         value={this.state.price}
-                        //placeholder='Price Product'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.color.focus()}
                     />
-                    <Text>Color Product:</Text>
+                    <Text style={styles.textUpdate}>Color Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={color => this.setState({ ...this.state, color })}
-
                         value={this.state.color}
-                        //placeholder='color product'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.material.focus()}
                     />
-                    <Text>Material Product:</Text>
+                    <Text style={styles.textUpdate}>Material Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={material => this.setState({ ...this.state, material })}
                         value={this.state.material}
-                        //placeholder='material product'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.description.focus()}
                     />
-                    <Text>Description Product:</Text>
+                    <Text style={styles.textUpdate}>Description Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={description => this.setState({ ...this.state, description })}
                         value={this.state.description}
-                        //placeholder='description product'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.new.focus()}
                     />
-                    <Text>New Product:</Text>
+                    <Text style={styles.textUpdate}>New Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={news => this.setState({ ...this.state, news })}
                         value={this.state.news}
                         placeholder='0 or 1'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                         onSubmitEditing={() => this.refs.collection.focus()}
                     />
-                    <Text>inCollection Product:</Text>
+                    <Text style={styles.textUpdate}>inCollection Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={collection => this.setState({ ...this.state, collection })}
                         value={this.state.collection}
                         placeholder='0 or 1'
                         placeholderTextColor='#CD8500'
                         returnKeyType='next'
-                        autoCorrect={false}//không hiện ra gợi ý khi nhập
+                        autoCorrect={false}
                     />
                     <TouchableOpacity style={signInContainer} onPress={() => this.update_product(this.props.product.id)}>
-                        <Text>UPDATE PRODUCT</Text>
+                        <Text style={styles.textUpdate}>UPDATE PRODUCT</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -321,6 +314,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.2)',
         borderRadius: 20,
     },
+    textUpdate: {
+        fontWeight: 'bold'
+    }
 });
 
 export default Update_product;
