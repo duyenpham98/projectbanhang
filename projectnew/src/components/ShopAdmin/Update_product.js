@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions ,Alert} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import RNFetchBlob from 'react-native-fetch-blob';
 import icLogo from '../../media/appIcon/logo.png';
 const back = require('../../media/appIcon/back.png');
-const url = 'http://192.168.100.8/react-native/app/images/product/';
+const url = 'http://192.168.100.5/react-native/app/images/product/';
 const options = {
     title: 'Select a photo',
     takePhotoButtonTitle: 'Take a photo',
@@ -36,22 +36,52 @@ class Update_product extends Component {
     }
     update_product(id) {
         if (this.state.name == "") {
-            alert("Product name must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product name must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.price == "") {
-            alert("Product price must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product price must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.color == "") {
-            alert("Product color must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product color must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.material == "") {
-            alert("Product material must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product material must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.description == "") {
-            alert("Product description must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product description must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.imageSource == null) {
-            fetch('http://192.168.100.8/react-native/app/update_product.php', {
+            fetch('http://192.168.100.5/react-native/app/update_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -71,14 +101,20 @@ class Update_product extends Component {
 
             })
                 .then((responseJson) => {
-                    alert("update product success");
+                    Alert.alert(
+                        'Notification',
+                        'Update product success',
+                        [
+                            { text: 'OK' },
+                        ],
+                    );
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         }
         else {
-            fetch('http://192.168.100.8/react-native/app/update_product_image.php', {
+            fetch('http://192.168.100.5/react-native/app/update_product_image.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -127,7 +163,7 @@ class Update_product extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.8/react-native/app/upload_file_update_product.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.5/react-native/app/upload_file_update_product.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',

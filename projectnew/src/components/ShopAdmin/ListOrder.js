@@ -18,7 +18,7 @@ class ListOrder extends Component {
         navigator.pop();
     }
     Delete_bill(id) {
-        fetch('http://192.168.100.8/react-native/app/delete_bill.php', {
+        fetch('http://192.168.100.5/react-native/app/delete_bill.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -52,7 +52,7 @@ class ListOrder extends Component {
         );
     }
     componentDidMount() {
-        return fetch('http://192.168.100.8/react-native/app/bill_product.php')
+        return fetch('http://192.168.100.5/react-native/app/bill_product.php')
             .then((response) => response.json())
             .then((responseJson) => {
 

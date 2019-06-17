@@ -4,13 +4,13 @@ import CartView from './CartView';
 import ProductDetail from '../ProductDetail/ProductDetail';
 class Cart extends Component {
     render() {
-        const { cartArray } = this.props;
+        const { cartArray , user} = this.props;
         return (
             <Navigator
                 initialRoute={{ name: 'CART_VIEW' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
-                        case 'CART_VIEW': return <CartView navigator={navigator} cartArray={cartArray} />;
+                        case 'CART_VIEW': return <CartView navigator={navigator} cartArray={cartArray} user={user}/>;
                         default: return <ProductDetail navigator={navigator} product={route.product} />;
                     }
                 }}

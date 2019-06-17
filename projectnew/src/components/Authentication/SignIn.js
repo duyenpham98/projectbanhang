@@ -7,7 +7,7 @@
 */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import saveToken from '../../api/saveToken';
 import global from '../global';
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
@@ -15,8 +15,8 @@ import signIn from '../../api/signIn';
 import { GoogleSignin } from 'react-native-google-signin';
 export default class SignIn extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             email: "",
             password: "",
@@ -88,10 +88,22 @@ export default class SignIn extends React.Component {
     onSignIn() {
         const { email, password } = this.state;
         if (email == '') {
-            alert("Email must not be empty");
+            Alert.alert(
+                'Notification',
+                'Email must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (password == '') {
-            alert("Password must not be empty");
+            Alert.alert(
+                'Notification',
+                'Password must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         else {
             signIn(email, password)

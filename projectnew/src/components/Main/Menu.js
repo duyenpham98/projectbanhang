@@ -53,14 +53,12 @@ const styles = StyleSheet.create({
 
 });
 
-
 class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = { user: null };
         global.onSignIn = this.onSignIn.bind(this);
     }
-
     onSignIn(user) {
         this.setState({ user });
     }

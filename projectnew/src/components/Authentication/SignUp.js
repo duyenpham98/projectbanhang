@@ -14,25 +14,61 @@ export default class SignUp extends React.Component {
     }
     insertaccount() {
         if (this.state.name == '') {
-            alert("Name must not be empty");
+            Alert.alert(
+                'Notification',
+                'Name must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.email == '') {
-            alert("Email must not be empty");
+            Alert.alert(
+                'Notification',
+                'Email must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.password == '') {
-            alert("Password must not be empty");
+            Alert.alert(
+                'Notification',
+                'Password must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.phone == '') {
-            alert("Phone must not be empty");
+            Alert.alert(
+                'Notification',
+                'Phone must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.address == '') {
-            alert("Address must not be empty");
+            Alert.alert(
+                'Notification',
+                'Address must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.password.length < 6) {
-            alert("Password must be more than 6 characters");
+            Alert.alert(
+                'Notification',
+                'Password must be more than 6 characters',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         else {
-            fetch('http://192.168.100.8/react-native/app/register.php', {
+            fetch('http://192.168.100.5/react-native/app/register.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -47,7 +83,13 @@ export default class SignUp extends React.Component {
                 }),
             })
                 .then((responseJson) => {
-                    alert("Account successfully created!");
+                    Alert.alert(
+                        'Notification',
+                        'Account successfully created!',
+                        [
+                            { text: 'OK' },
+                        ],
+                    );
                     this.setState({ email: '' });
                     this.setState({ name: '' });
                     this.setState({ password: '' });

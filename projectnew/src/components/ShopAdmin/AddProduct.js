@@ -33,31 +33,79 @@ class AddProduct extends Component {
     }
     add_product() {
         if (this.state.name == "") {
-            alert("Product name must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product name must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.price == "") {
-            alert("Product price must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product price must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.color == "") {
-            alert("Product color must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product color must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.material == "") {
-            alert("Product material must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product material must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.description == "") {
-            alert("Product description must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product description must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.news == "") {
-            alert("Product news must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product news must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.collection == "") {
-            alert("Product collection must not be empty");
+            Alert.alert(
+                'Notification',
+                'Product collection must not be empty',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         if (this.state.imageSource == null) {
-            alert('Please select a product image to add');
+            Alert.alert(
+                'Notification',
+                'Please select a product image to add',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         else {
-            fetch('http://192.168.100.8/react-native/app/add_product.php', {
+            fetch('http://192.168.100.5/react-native/app/add_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -84,7 +132,13 @@ class AddProduct extends Component {
                     this.setState({ news: "" });
                     this.setState({ collection: "" });
                     onPress = this.uploadPhoto();
-                    alert("add product success");
+                    Alert.alert(
+                        'Notification',
+                        'Add product success',
+                        [
+                            { text: 'OK' },
+                        ],
+                    );
                 })
                 .catch((error) => {
                     console.error(error);
@@ -126,7 +180,7 @@ class AddProduct extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.8/react-native/app/upload_file.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.5/react-native/app/upload_file.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',
@@ -162,50 +216,31 @@ class AddProduct extends Component {
                     <TextInput style={styles.textInput}
                         onChangeText={(name) => this.setState({ name })}
                         value={this.state.name}
-                        autoFocus={true}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.id_type.focus()}
                     />
                     <Text style={styles.textHead}>id_Type Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(id_type) => this.setState({ id_type })}
                         value={this.state.id_type}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.color.focus()}
                     />
                     <Text style={styles.textHead}>Price Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(price) => this.setState({ price })}
                         value={this.state.price}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.color.focus()}
                     />
                     <Text style={styles.textHead}>Color Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(color) => this.setState({ color })}
                         value={this.state.color}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.material.focus()}
                     />
                     <Text style={styles.textHead}>Material Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(material) => this.setState({ material })}
                         value={this.state.material}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.description.focus()}
                     />
                     <Text style={styles.textHead}>Description Product*</Text>
                     <TextInput style={styles.textInput}
                         onChangeText={(description) => this.setState({ description })}
                         value={this.state.description}
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.new.focus()}
                     />
                     <Text style={styles.textHead}>New Product*</Text>
                     <TextInput style={styles.textInput}
@@ -213,9 +248,6 @@ class AddProduct extends Component {
                         value={this.state.news}
                         placeholder='0 or 1'
                         placeholderTextColor='#1C1C1C'
-                        returnKeyType='next'
-                        autoCorrect={false}
-                        onSubmitEditing={() => this.refs.collection.focus()}
                     />
                     <Text style={styles.textHead}>inCollection Product*</Text>
                     <TextInput style={styles.textInput}
@@ -223,8 +255,6 @@ class AddProduct extends Component {
                         value={this.state.collection}
                         placeholder='0 or 1'
                         placeholderTextColor='#1C1C1C'
-                        returnKeyType='next'
-                        autoCorrect={false}
                     />
                     <TouchableOpacity style={mapContainer1} onPress={this.success_add_product.bind(this)}>
                         <Text>ADD PRODUCT</Text>

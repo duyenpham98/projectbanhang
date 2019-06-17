@@ -1,11 +1,12 @@
 import React, { component } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Alert } from 'react-native';
 import Home from './Home/Home';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Contact from './Contact/Contact';
 import TabNavigator from 'react-native-tab-navigator';
 import Header from './Header';
+import Message from './Mess/Message';
 import initData from '../../../api/initData';
 import saveCart from '../../../api/saveCart';
 import getCart from '../../../api/getCart';
@@ -13,12 +14,15 @@ import homeIcon0 from '../../../media/appIcon/home0.png';
 import homeIcon from '../../../media/appIcon/home.png';
 import cart0 from '../../../media/appIcon/cart0.png';
 import cart from '../../../media/appIcon/cart.png';
+import mess from '../../../media/appIcon/mess.png';
+import mess0 from '../../../media/appIcon/mess0.jpeg';
 import search0 from '../../../media/appIcon/search0.png';
 import search from '../../../media/appIcon/search.png';
 import contact0 from '../../../media/appIcon/contact0.png';
 import contact from '../../../media/appIcon/contact.png';
 import global from '../../global';
-
+import getToken from '../../../api/getToken';
+import checkLogin from '../../../api/checkLogin';
 export default class Shop extends React.Component {
 
     constructor(props) {
@@ -27,7 +31,8 @@ export default class Shop extends React.Component {
             selectedTab: 'home',
             types: [],
             topProducts: [],
-            cartArray: []
+            cartArray: [],
+            user: null,
         };
         global.addProductToCart = this.addProductToCart.bind(this);
         global.incrQuantity = this.incrQuantity.bind(this);
@@ -47,14 +52,26 @@ export default class Shop extends React.Component {
     addProductToCart(product) {
         const isExist = this.state.cartArray.some(e => e.product.id === product.id);
         if (isExist) {
-            alert("This product has been added to the previous cart");
+            Alert.alert(
+                'Notification',
+                'This product is already in the shopping cart',
+                [
+                    { text: 'OK' },
+                ],
+            );
             return false;
         }
         this.setState(
             { cartArray: this.state.cartArray.concat({ product, quantity: 1 }) },
             () => saveCart(this.state.cartArray)
         );
-        alert("Product has been put into cart");
+        Alert.alert(
+            'Notification',
+            'Products are put into cart',
+            [
+                { text: 'OK' },
+            ],
+        );
     }
     incrQuantity(productId) {
         const newCart = this.state.cartArray.map(e => {
@@ -70,7 +87,13 @@ export default class Shop extends React.Component {
         const newCart = this.state.cartArray.map(e => {
             if (e.product.id !== productId) return e;
             if (e.quantity <= 1) {
-                alert("The product you want to buy is not under one");
+                Alert.alert(
+                    'Notification',
+                    'The product you want to buy is not under one',
+                    [
+                        { text: 'OK' },
+                    ],
+                );
                 return e;
             }
             return { product: e.product, quantity: e.quantity - 1 };
@@ -87,13 +110,19 @@ export default class Shop extends React.Component {
             });
         getCart()
             .then(cartArray => this.setState({ cartArray }));
+        getToken()
+        .then(token => checkLogin(token))
+        .then(res => {
+            global.onSignIn(res.user);
+            this.setState({ user: res.user });
+        });
     }
     openMenu() {
         const { open } = this.props;
         open();
     }
     render() {
-        const { types, selectedTab, topProducts, cartArray } = this.state;
+        const { types, selectedTab, topProducts, cartArray, user } = this.state;
         return (
             <View style={{ flex: 1, backgroundColor: '#85A6C9' }}>
                 <Header onOpen={this.openMenu.bind(this)} />
@@ -122,10 +151,10 @@ export default class Shop extends React.Component {
                         renderSelectedIcon={() =>
                             <Image style={styleApp.iconStyle} source={cart} />}
                         selected={selectedTab === 'cart'}
-                        title="cart"
+                        title="Cart"
                         badgeText={cartArray.length}
                         onPress={() => this.setState({ selectedTab: 'cart' })}>
-                        <Cart cartArray={cartArray} />
+                        <Cart cartArray={cartArray} user={user}/>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         renderIcon={() => <Image style={styleApp.iconStyle} source={search0} />}
@@ -133,9 +162,19 @@ export default class Shop extends React.Component {
                             <Image style={styleApp.iconStyle} source={search} />}
 
                         selected={selectedTab === 'search'}
-                        title="search"
+                        title="Search"
                         onPress={() => this.setState({ selectedTab: 'search' })}>
                         <Search />
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        selected={selectedTab === 'mess'}
+                        renderIcon={() => <Image style={styleApp.iconStyle} source={mess} />}
+                        renderSelectedIcon={() =>
+                            <Image style={styleApp.iconStyle} source={mess0} />}
+                        title="Message"
+                        onPress={() => this.setState({ selectedTab: 'mess' })}
+                    >
+                        <Message user ={user} />
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>
