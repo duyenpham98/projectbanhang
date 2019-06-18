@@ -68,7 +68,7 @@ export default class SignUp extends React.Component {
             );
         }
         else {
-            fetch('http://192.168.100.5/react-native/app/register.php', {
+            fetch('http://192.168.100.9/react-native/app/register.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

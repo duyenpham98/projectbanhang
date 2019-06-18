@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.projectnew">
-
+  package="com.projectnew" xmlns:tools="http://schemas.android.com/tools">
+    
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />                                                 
@@ -12,6 +12,8 @@
       android:icon="@mipmap/app"
       android:roundIcon="@mipmap/app"
       android:allowBackup="false"
+      tools:replace="android:appComponentFactory"
+      android:appComponentFactory="whateverString"
       android:theme="@style/AppTheme">
       
       <activity

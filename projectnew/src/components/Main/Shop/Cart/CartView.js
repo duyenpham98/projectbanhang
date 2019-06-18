@@ -8,13 +8,13 @@ import global from '../../../global';
 import sendOrder from '../../../../api/sendOrder';
 import sendOrdercard from '../../../../api/sendOrdercard';
 import getToken from '../../../../api/getToken';
-import checkLogin from '../../../../api/checkLogin';
 const url = 'http://192.168.100.8/react-native/app/images/product/';
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
 class CartView extends Component {
+
     gotoDetail(product) {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL', product });
@@ -83,7 +83,7 @@ class CartView extends Component {
                 console.log(e);
             }
         }
-        else{
+        else {
             Alert.alert(
                 'Notification',
                 'Please login',

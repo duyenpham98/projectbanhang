@@ -105,7 +105,7 @@ class AddProduct extends Component {
             );
         }
         else {
-            fetch('http://192.168.100.5/react-native/app/add_product.php', {
+            fetch('http://192.168.100.9/react-native/app/add_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -180,7 +180,7 @@ class AddProduct extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.5/react-native/app/upload_file.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.9/react-native/app/upload_file.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',

@@ -1,5 +1,5 @@
 const initData = () => (
-    fetch('http://192.168.100.5/react-native/app/')// eslint-disable-line
+    fetch('http://192.168.100.9/react-native/app/')// eslint-disable-line
         .then(res => res.json())
 );
 

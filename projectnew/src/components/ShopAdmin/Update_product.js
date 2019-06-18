@@ -5,7 +5,7 @@ import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-ha
 import RNFetchBlob from 'react-native-fetch-blob';
 import icLogo from '../../media/appIcon/logo.png';
 const back = require('../../media/appIcon/back.png');
-const url = 'http://192.168.100.5/react-native/app/images/product/';
+const url = 'http://192.168.100.9/react-native/app/images/product/';
 const options = {
     title: 'Select a photo',
     takePhotoButtonTitle: 'Take a photo',
@@ -81,7 +81,7 @@ class Update_product extends Component {
             );
         }
         if (this.state.imageSource == null) {
-            fetch('http://192.168.100.5/react-native/app/update_product.php', {
+            fetch('http://192.168.100.9/react-native/app/update_product.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -114,7 +114,7 @@ class Update_product extends Component {
                 });
         }
         else {
-            fetch('http://192.168.100.5/react-native/app/update_product_image.php', {
+            fetch('http://192.168.100.9/react-native/app/update_product_image.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -163,7 +163,7 @@ class Update_product extends Component {
         });
     }
     uploadPhoto() {
-        RNFetchBlob.fetch('POST', 'http://192.168.100.5/react-native/app/upload_file_update_product.php', {
+        RNFetchBlob.fetch('POST', 'http://192.168.100.9/react-native/app/upload_file_update_product.php', {
             Authorization: "Bearer access-token",
             otherHeader: "foo",
             'Content-Type': 'multipart/form-data',

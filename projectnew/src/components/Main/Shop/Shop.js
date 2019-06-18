@@ -111,11 +111,11 @@ export default class Shop extends React.Component {
         getCart()
             .then(cartArray => this.setState({ cartArray }));
         getToken()
-        .then(token => checkLogin(token))
-        .then(res => {
-            global.onSignIn(res.user);
-            this.setState({ user: res.user });
-        });
+            .then(token => checkLogin(token))
+            .then(res => {
+                global.onSignIn(res.user);
+                this.setState({ user: res.user });
+            });
     }
     openMenu() {
         const { open } = this.props;
@@ -154,7 +154,7 @@ export default class Shop extends React.Component {
                         title="Cart"
                         badgeText={cartArray.length}
                         onPress={() => this.setState({ selectedTab: 'cart' })}>
-                        <Cart cartArray={cartArray} user={user}/>
+                        <Cart cartArray={cartArray} user={user} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         renderIcon={() => <Image style={styleApp.iconStyle} source={search0} />}
@@ -171,10 +171,9 @@ export default class Shop extends React.Component {
                         renderIcon={() => <Image style={styleApp.iconStyle} source={mess} />}
                         renderSelectedIcon={() =>
                             <Image style={styleApp.iconStyle} source={mess0} />}
-                        title="Message"
-                        onPress={() => this.setState({ selectedTab: 'mess' })}
-                    >
-                        <Message user ={user} />
+                        title="Mess"
+                        onPress={() => this.setState({ selectedTab: 'mess' })}>
+                        <Message user={user} />
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>

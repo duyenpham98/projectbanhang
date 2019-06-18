@@ -10,18 +10,6 @@ class BackEnd {
             storageBucket: "banhang-1557992514240.appspot.com",
             messagingSenderId: "731795877247",
         });
-        firebase.auth().onAuthStateChanged((user) => 
-        {
-            if(user){
-                this.setUid(user.uid);
-            } else
-            {
-                firebase.auth().signInAnonymously().catch((error)=>
-                {
-                    console.log(error.message);
-                });
-            }
-        });
     }
 
     setUid(value){
@@ -43,7 +31,7 @@ class BackEnd {
                 createdAt: new Date(message.createdAt),
                 user: {
                     _id: message.user._id,
-                    name: 'React Native',
+                    name: message.user.name,
                     avatar: 'https://placeimg.com/140/140/any',
                 },
             });
@@ -54,7 +42,7 @@ class BackEnd {
         for(let i =0 ; i < message.length ; i++){
             this.messagesRef.push({
                 text: message[i].text,
-                user: message[i].text,
+                user: message[i].user,
                 createdAt: firebase.database.ServerValue.TIMESTAMP,
             });
         }

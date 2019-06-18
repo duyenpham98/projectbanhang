@@ -1,7 +1,7 @@
 const sendOrder = (token, arrayDetail) => {
     const data = { token, arrayDetail };
     console.log(data);
-    return fetch('http://192.168.100.5/react-native/app/cart.php',
+    return fetch('http://192.168.100.9/react-native/app/cart.php',
         {
             method: 'POST',
             headers: {
