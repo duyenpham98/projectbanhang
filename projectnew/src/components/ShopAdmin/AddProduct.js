@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import RNFetchBlob from 'react-native-fetch-blob';
-import icLogo from '../../media/appIcon/logo.png';
+import icLogo from '../../media/appIcon/logo.jpeg';
 const back = require('../../media/appIcon/back.png');
 const options = {
     title: 'Select a photo',

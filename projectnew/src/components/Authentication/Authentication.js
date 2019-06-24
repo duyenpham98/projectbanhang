@@ -3,7 +3,7 @@ import {
   View, Text, TouchableOpacity, Dimensions, Image, StyleSheet
 } from 'react-native';
 import icBack from '../../media/appIcon/back_white.png';
-import icLogo from '../../media/appIcon/logo.png';
+import icLogo from '../../media/appIcon/logo.jpeg';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 export default class Authentication extends Component {

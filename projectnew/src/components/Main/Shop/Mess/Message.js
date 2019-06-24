@@ -1,5 +1,6 @@
 import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat';
+import { Alert } from 'react-native';
 import BackEnd from './BackEnd';
 class Message extends React.Component {
     state = {
@@ -30,10 +31,15 @@ class Message extends React.Component {
             });
         });
     }
-
     componentWillMount() {
         if(this.props.user == null){
-            alert('Please login to chat');
+            Alert.alert(
+                'Notification',
+                'Please login to chat!',
+                [
+                    { text: 'OK' },
+                ],
+            );
         }
         BackEnd.closeChat();
     }

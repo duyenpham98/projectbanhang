@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
-import icLogo from '../../media/appIcon/logo.png';
+import icLogo from '../../media/appIcon/logo.jpeg';
 
 const url = 'http://192.168.100.9/react-native/app/images/product/';
 const back = require('../../media/appIcon/back.png');
@@ -9,7 +9,7 @@ class ListProduct extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            state: false,
+            dataSource: [],
         }
     }
     gotoUpdate(product) {
@@ -29,7 +29,17 @@ class ListProduct extends Component {
             }),
         })
             .then((responseJson) => {
-                alert("delete product success");
+                Alert.alert(
+                    'Notification',
+                    'Delete product success',
+                    [
+                        { text: 'OK' },
+                    ],
+                );
+                const newProduct = this.state.dataSource.filter(e => e.id !== id);
+                this.setState({
+                    dataSource: newProduct
+                }, );
             })
             .catch((error) => {
                 console.error(error);
@@ -93,9 +103,9 @@ class ListProduct extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>
-                        <TouchableOpacity onPress={() => this.gotoUpdate(item)}>
-                            <View style={styles.wrapper1}>
-                                <View style={styles.imageContainer}>
+                        <TouchableOpacity onPress={() => this.gotoUpdate(item)} >
+                            <View style={styles.wrapper1} >
+                                <View style={styles.imageContainer} key={item.id}>
                                     <TouchableOpacity style={styles.touch} onPress={() => this.Delete(item.id)} >
                                         <Text style={{ fontSize: 20, color: '#EE2C2C' }}>x</Text>
                                     </TouchableOpacity>
@@ -109,7 +119,7 @@ class ListProduct extends Component {
                             </View>
                         </TouchableOpacity>
                     }
-                    keyExtractor={({ id }, index) => id}
+                    keyExtractor={(id, index) => id}
 
                 />
 

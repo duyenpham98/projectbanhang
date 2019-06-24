@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Linking, Platform, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 import phoneIcon from '../../../../media/appIcon/phone.png';
 import mailIcon from '../../../../media/appIcon/mail.png';
 import messageIcon from '../../../../media/appIcon/message.png';
 import locationIcon from '../../../../media/appIcon/location.png';
 class Contact extends Component {
+    dialCall = () => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') {
+            phoneNumber = 'tel:${1234567890}';
+        }
+        else {
+            phoneNumber = 'telprompt:${1234567890}';
+        }
+
+        Linking.openURL(phoneNumber);
+    };
     render() {
         const {
             mapContainer, wrapper, infoContainer,
@@ -40,7 +51,9 @@ class Contact extends Component {
                     </View>
                     <View style={rowInfoContainer}>
                         <Image source={phoneIcon} style={imageStyle} />
-                        <Text style={infoText}>(+84) 111111</Text>
+                        <TouchableOpacity onPress={this.dialCall} activeOpacity={0.7}>
+                            <Text style={infoText}>(+84) 1234567890</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={rowInfoContainer}>
                         <Image source={mailIcon} style={imageStyle} />

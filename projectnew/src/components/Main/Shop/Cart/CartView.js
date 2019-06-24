@@ -8,7 +8,7 @@ import global from '../../../global';
 import sendOrder from '../../../../api/sendOrder';
 import sendOrdercard from '../../../../api/sendOrdercard';
 import getToken from '../../../../api/getToken';
-const url = 'http://192.168.100.8/react-native/app/images/product/';
+const url = 'http://192.168.100.9/react-native/app/images/product/';
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }

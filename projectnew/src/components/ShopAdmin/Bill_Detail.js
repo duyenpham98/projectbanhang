@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions,Alert } from 'react-native';
-import icLogo from '../../media/appIcon/logo.png';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions, Alert } from 'react-native';
+import icLogo from '../../media/appIcon/logo.jpeg';
 import bill_order from '../../api/bill_order';
 const { width } = Dimensions.get('window');
 const back = require('../../media/appIcon/back.png');
@@ -24,27 +24,39 @@ class Bill_Detail extends Component {
             }),
         })
             .then((responseJson) => {
-                alert("Delete success");
+                Alert.alert(
+                    'Notification',
+                    'Delete success',
+                    [
+                        { text: 'OK' },
+                    ],
+                );
+                const newOrder = this.state.listProducts.filter(e => e.id !== id);
+                this.setState({
+                    listProducts: newOrder
+                },
+                );
+
             })
             .catch((error) => {
                 console.error(error);
             });
 
     }
-    Delete(id){
+    Delete(id) {
         Alert.alert(
             'Delete Bill Detail',
             'Do you want delete this bill detail?',
             [
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: ()=>this.Delete_bill_detail(id)},
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => this.Delete_bill_detail(id) },
             ],
-            {cancelable: false},
-          );
+            { cancelable: false },
+        );
     }
     goBack() {
         const { navigator } = this.props;
@@ -82,29 +94,29 @@ class Bill_Detail extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
-                                        <Text style={{ color: '#2ABB9C' }}>{item.id}</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold',fontSize: 18 }}>bill id:</Text>
+                                        <Text style={{ color: '#2ABB9C' ,fontSize: 18}}>{item.id}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Name Product:</Text>
-                                        <Text style={{ color: '#C21C70' }}>{item.name.toUpperCase()}</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold',fontSize: 18 }}>Name Product:</Text>
+                                        <Text style={{ color: '#C21C70' ,fontSize: 18}}>{item.name.toUpperCase()}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Price:</Text>
-                                        <Text style={{ color: '#2ABB9C' }}>{item.price}</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' ,fontSize: 18}}>Price:</Text>
+                                        <Text style={{ color: '#2ABB9C' ,fontSize: 18}}>{item.price}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Amount:</Text>
-                                        <Text style={{ color: '#C21C70' }}>{item.quantity}</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold',fontSize: 18 }}>Amount:</Text>
+                                        <Text style={{ color: '#C21C70',fontSize: 18 }}>{item.quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Material:</Text>
-                                        <Text style={{ color: '#C21C70' }}>{item.material}</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold',fontSize: 18 }}>Material:</Text>
+                                        <Text style={{ color: '#C21C70',fontSize: 18 }}>{item.material}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Color:</Text>
+                                        <Text style={{ color: '#9A9A9A', fontWeight: 'bold' ,fontSize: 18}}>Color:</Text>
                                         <View style={{ height: 15, width: 15, backgroundColor: item.color.toLowerCase(), borderRadius: 15, marginLeft: 5, borderWidth: 1, borderColor: '#C21C70', marginTop: 3 }} />
-                                        <Text style={{ color: '#2ABB9C' }}>{item.color}</Text>
+                                        <Text style={{ color: '#2ABB9C',fontSize: 18 }}>{item.color}</Text>
                                     </View>
                                 </View>
                             </View>

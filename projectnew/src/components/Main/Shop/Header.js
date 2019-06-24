@@ -1,6 +1,6 @@
 import React, { component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
-import icLogo from '../../../media/appIcon/logo.png';
+import icLogo from '../../../media/appIcon/logo.jpeg';
 import icMenu from '../../../media/appIcon/ic_menu.png';
 import global from '../../global';
 import search from '../../../api/searchProduct';
