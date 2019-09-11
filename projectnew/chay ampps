@@ -1,0 +1,19 @@
+sudo QT_X11_NO_MITSHM=1 /usr/local/ampps/Ampps
+
+sudo chmod 777 -R /dev/kvm
+
+///dành cho 2 file index.ios.js && index.android.js 
+react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+///lệnh chạy cityfalcon
+npm run android-linux
+
+
+/////dành cho 1 file index.js
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+
+
+
+
+
