@@ -6,5 +6,6 @@ module.exports = {
     onSignIn: null,
     onSignIn1: null,
     gotoSearch: null,
-    setArraySearch: null
+    setArraySearch: null,
+    vvvv: null,
 };
