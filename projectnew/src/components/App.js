@@ -12,6 +12,7 @@ import Bill_Detail from './ShopAdmin/Bill_Detail';
 import Update_product from './ShopAdmin/Update_product';
 export default class App extends React.Component {
     // new line
+    //new line 2
     componentDidMount() {
         setInterval(refreshToken, 30000);
     }
