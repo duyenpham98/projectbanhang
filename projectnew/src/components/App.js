@@ -15,6 +15,8 @@ export default class App extends React.Component {
     //new line 4
     //new line 5
     // bsamhdjmas
+
+    //new line 7
     componentDidMount() {
         setInterval(refreshToken, 30000);
     }
